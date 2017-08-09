@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 594d72e1d1083154c98a09d0720162df
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: BVH:Head
@@ -82,6 +82,10 @@ ModelImporter:
     400074: BVH:Spine
     400076: BVH:Spine1
     7400000: Shooting 01 Shotgun (79_96)
+    7400002: GunAming1
+    7400004: GunAming2
+    7400006: ShootGun
+    7400008: ShootGunAndReload
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -93,6 +97,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip '79_96' has import animation warnings that might
       lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
@@ -102,7 +108,21 @@ ModelImporter:
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'BVH:LeftFingerBase'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'BVH:RightFingerBase'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: 
+    animationRetargetingWarnings: "\nRetargeting quality report for clip '79_96':\n\tLeftLowerLeg
+      average position error 9.7 mm and maximum position error 19.7 mm at time 4:
+      2 (87.5%) Frame 98\n\tRightLowerLeg average position error 22.8 mm and maximum
+      position error 45.5 mm at time 2:12 (53.6%) Frame 60\n\tRightFoot average position
+      error 1.7 mm and maximum position error 5.4 mm at time 2:12 (53.6%) Frame 60\n\tLeftUpperArm
+      average position error 5.4 mm and maximum position error 10.9 mm at time 4:
+      1 (86.6%) Frame 97\n\tLeftLowerArm average position error 2.9 mm and maximum
+      position error 7.6 mm at time 2:12 (53.6%) Frame 60\n\tLeftHand average position
+      error 1.9 mm and maximum position error 8.0 mm at time 2:12 (53.6%) Frame 60\n\tRightUpperArm
+      average position error 5.4 mm and maximum position error 10.9 mm at time 4:
+      1 (86.6%) Frame 97\n\tRightLowerArm average position error 3.3 mm and maximum
+      position error 7.5 mm at time 2:16 (57.1%) Frame 64\n\tRightHand average position
+      error 1.1 mm and maximum position error 5.0 mm at time 2:12 (53.6%) Frame 60\n\tHead
+      average position error 13.9 mm and maximum position error 23.4 mm at time 2:13
+      (54.5%) Frame 61\n"
     animationDoRetargetingWarnings: 1
     animationCompression: 1
     animationRotationError: 0.5
@@ -110,6 +130,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Shooting 01 Shotgun (79_96)
@@ -139,13 +160,128 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GunAming1
+      takeName: 79_96
+      firstFrame: 19
+      lastFrame: 27
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GunAming2
+      takeName: 79_96
+      firstFrame: 34
+      lastFrame: 55
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootGun
+      takeName: 79_96
+      firstFrame: 50
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootGunAndReload
+      takeName: 79_96
+      firstFrame: 56
+      lastFrame: 112
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -161,6 +297,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 4
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

@@ -7,6 +7,7 @@ using System.Collections;
 public enum ePlayerState
 {
     None,           ///< 아무 상태도 아님
+
 }
 
 

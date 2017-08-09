@@ -18,30 +18,28 @@ public enum eLogFilter : int
 /// 현재는 필터만 적용
 /// </summary>
 public class Log : MonoBehaviour {
-    public static Log Instance;
-    private bool[] mFilters;
-
+    public static Log Instance = null;
     public bool[] Filters
     {
-        get { return mFilters; }
+        get { return DevelopOptions.LogFilter.Filters; }
     }
 
     void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-            InitFilter();
-        }
-        else
-        { 
+        else 
             Debug.LogError("Log has two instances");
-        }
     }
+
+    void Start()
+    {
+        DontDestroyOnLoad(this);
+    } 
 
     public static void PrintError(eLogFilter _filter, object _message)
     {
-        if (Instance.mFilters[(int)_filter] == false)
+        if (Instance.Filters[(int)_filter] == false)
             return;
 
         Debug.LogError("[" + _filter.ToString() + "]" + _message);
@@ -49,7 +47,7 @@ public class Log : MonoBehaviour {
 
     public static void Print(eLogFilter _filter, object _message)
     {
-        if (Instance.mFilters[(int)_filter] == false)
+        if (Instance.Filters[(int)_filter] == false)
             return;
 
         Debug.Log("[" + _filter.ToString() + "]" + _message);
@@ -58,16 +56,5 @@ public class Log : MonoBehaviour {
     public static void Print(object _message)
     {
         Print(eLogFilter.Normal, _message);
-    }
-
-    private void InitFilter()
-    {
-#if UNITY_EDITOR
-        Debug.Log("InitFilter by with_editor");
-        mFilters = DevelopOptions.LogFilter.Filters;
-#else //. WITH_EDITOR
-        Debug.Log("InitFilter by with normal");
-        mFilters = new bool[Enum.GetValues(typeof(eLogFilter)).Length];
-#endif //. WITH_EDITOR
     }
 }

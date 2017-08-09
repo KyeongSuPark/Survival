@@ -40,7 +40,6 @@ public class LogFilterOption
     public bool[] Filters; 
     public LogFilterOption()
     {
-        Filters = new bool[Enum.GetValues(typeof(eLogFilter)).Length];
     }
 
     public bool Save()
@@ -59,6 +58,9 @@ public class LogFilterOption
         {
             string str = File.ReadAllText(FilePath);
             JsonUtility.FromJsonOverwrite(str, this);
+
+            if(Filters.Length == 0)
+                Filters = new bool[Enum.GetValues(typeof(eLogFilter)).Length];
         }
 #endif //. UNITY_EDITOR
         return true;

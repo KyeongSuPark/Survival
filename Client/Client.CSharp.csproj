@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BowBehaviour.cs" />
     <Compile Include="Assets\ImportedAssets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\ImportedAssets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\ImportedAssets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\Scripts\Etc\ScreenResolutionSetter.cs" />
     <Compile Include="Assets\Scripts\Manager\Log.cs" />
     <Compile Include="Assets\Scripts\Options\DevelopOptions.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\State\PlayerState.cs" />
   </ItemGroup>
   <ItemGroup>

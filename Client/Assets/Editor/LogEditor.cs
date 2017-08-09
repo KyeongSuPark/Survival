@@ -26,6 +26,9 @@ public class LogEditor : Editor
         foreach(eLogFilter value in Enum.GetValues(typeof(eLogFilter)))
         {
             int i = (int)value;
+            if (i < 0 || i >= Log.Instance.Filters.Length)
+                break;
+
             Log.Instance.Filters[i] = EditorGUILayout.Toggle(mEnumNames[i], Log.Instance.Filters[i]);            
         }
 
