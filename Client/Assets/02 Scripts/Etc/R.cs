@@ -80,6 +80,9 @@ public class R
         public static string ANIM_TRIGGER_RUN = "Run";           ///< Run
 
         /// Input 
+        public static string INPUT_RUN = "Run";                 ///< Run
+        public static string INPUT_WALK = "Walk";               ///< Walk
+        public static string INPUT_SNEAK = "Sneak";             ///< Sneak
 
         /// Tag       
 

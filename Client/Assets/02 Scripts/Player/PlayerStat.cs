@@ -13,6 +13,7 @@ public class PlayerStat : MonoBehaviour {
     private eRps m_Rps;                             ///< 현재 가위 바위 보
     private eRps m_SpecialRps;                      ///< 내가 선택한 필살 가위 바위 보
 
+    public float m_OriginMaxVelocity;                ///< 능력치상 원래 최대 속도
     public RangeFloatValue m_Velocity;              ///< 속도
     public RangeIntValue m_Stamina;                 ///< 체력
 
@@ -24,10 +25,20 @@ public class PlayerStat : MonoBehaviour {
     public float MaxVelocity
     {
         get { return m_Velocity.m_Max; ; }
+        set { m_Velocity.m_Max = value; }
+    }
+
+    public float OriginMaxVelocity
+    {
+        get { return m_OriginMaxVelocity; }
     }
 
     public int Stamina {
         get { return m_Stamina.GetValue(); }
+    }
+
+    public float Accel {
+        get { return m_Accel; }
     }
 
 	// Use this for initialization
@@ -46,9 +57,8 @@ public class PlayerStat : MonoBehaviour {
     public void IncreaseVelocity()
     {
         //Debug.Log(string.Format("inc {0:F3}", m_Velocity));
-        m_Velocity.SetValue(m_Velocity.GetValue() + m_Accel * Time.deltaTime);
+        Velocity = Velocity + m_Accel * Time.deltaTime;
     }
-
     /// <summary>
     ///   지친 상태인가?
     /// </summary>
