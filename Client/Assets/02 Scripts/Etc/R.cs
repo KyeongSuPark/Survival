@@ -83,6 +83,7 @@ public class R
         public static string INPUT_RUN = "Run";                 ///< Run
         public static string INPUT_WALK = "Walk";               ///< Walk
         public static string INPUT_SNEAK = "Sneak";             ///< Sneak
+        public static string INPUT_JUMP = "Jump";               ///< Jump (Roll)
 
         /// Tag       
 
@@ -108,5 +109,6 @@ public class R
     {
         public static int STATE = Animator.StringToHash("State");
         public static int MOVE_STATE = Animator.StringToHash("MoveState");
+        public static int ROLL = Animator.StringToHash("Roll");
     }
 }

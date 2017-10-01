@@ -29,10 +29,12 @@ public class Player : MonoBehaviour {
             m_State.Update();
 	}
 
-    void PostUpdate()
+    void LateUpdate()
     {
         if (m_State != null)
             m_State.PostUpdate();
+        
+        CheckAnyState();
     }
 
     /// <summary>
@@ -54,6 +56,15 @@ public class Player : MonoBehaviour {
             Debug.Log("anim event " + _event.ToString());
             m_State.OnAnimationEvent(_event);
         }
+    }
+
+    /// <summary>
+    ///   State 제약 없이 변경되어야 하는 상태 체크
+    /// </summary>
+    private void CheckAnyState()
+    {
+        if(Input.GetButtonDown(R.String.INPUT_JUMP))
+            ChangeState(ePlayerState.Roll);
     }
 
     /// <summary>
@@ -80,7 +91,7 @@ public class Player : MonoBehaviour {
         if (m_State != null)
             m_State.OnStateExit();
 
-        Log.Print(eLogFilter.State, string.Format("change state to [{0}] from [{1}]", _newState, m_State));
+        Log.Print(eLogFilter.State, string.Format("change state [{1}] -> [{0}] ", _newState, m_State));
         m_State = newUnitState;
         m_State.OnStateEnter(_arg);
     }

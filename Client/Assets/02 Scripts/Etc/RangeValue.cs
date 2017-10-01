@@ -11,7 +11,8 @@ public class RangeValue<T> where T : IComparable<T>
 {
     public T m_Max;        ///< 최대 값
     public T m_Min;        ///< 최소 값
-    protected T m_Value;   ///< 현재 값
+    //protected T m_Value;  
+    public T m_Value;      ///< 현재 값 디버그용
 
     public T GetValue() { return m_Value; }
     public virtual void SetValue(T _value) { }

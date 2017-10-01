@@ -21,6 +21,7 @@ public class MoveState : PlayerState {
     public override void OnStateEnter(StateChangeEventArg _arg = null)
     {
         CheckMoveState();
+        AdjustMoveVelocity();
         m_Animator.SetInteger(R.AnimHash.STATE, (int)GetCode());
         m_Animator.SetInteger(R.AnimHash.MOVE_STATE, (int)GetMoveState());
     }
@@ -55,6 +56,7 @@ public class MoveState : PlayerState {
     public override void PostUpdate()
     {
         //. Input에 따라 MoveState 변경
+        CheckMoveState();
     }
 
     public override void FixedUpdate()
@@ -92,6 +94,7 @@ public class MoveState : PlayerState {
         {
             Log.Print(eLogFilter.State, string.Format("change move state to [{0}] from [{1}]", _state, m_eMoveState));
             m_eMoveState = _state;
+            m_Animator.SetInteger(R.AnimHash.MOVE_STATE, (int)GetMoveState());
             OnChangedMoveState();
         }
     }
@@ -101,13 +104,21 @@ public class MoveState : PlayerState {
     /// </summary>
     private void OnChangedMoveState()
     {
-        switch(GetMoveState())
+        AdjustMoveVelocity();
+    }
+
+    /// <summary>
+    ///   상태에 맞게 Player의 최대 속도를 조절한다.
+    /// </summary>
+    private void AdjustMoveVelocity()
+    {
+        switch (GetMoveState())
         {
             case eMoveState.Run: m_Stat.MaxVelocity = m_Stat.OriginMaxVelocity;
                 break;
-            case eMoveState.Walk: m_Stat.MaxVelocity = m_Stat.OriginMaxVelocity * m_Option.m_WalkVelocityOffset;
+            case eMoveState.Walk: m_Stat.MaxVelocity = m_Stat.OriginMaxVelocity * m_Option.m_WalkAccelOffset;
                 break;
-            case eMoveState.Sneak: m_Stat.MaxVelocity = m_Stat.OriginMaxVelocity * m_Option.m_SneakVelocityOffset;
+            case eMoveState.Sneak: m_Stat.MaxVelocity = m_Stat.OriginMaxVelocity * m_Option.m_SneakAccelOffset;
                 break;
         }
     }
