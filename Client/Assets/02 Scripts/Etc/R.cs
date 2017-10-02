@@ -71,7 +71,14 @@ public class R
     public class Const
     {
         public static int INDEX_NONE = -1;
+    }
 
+    /// <summary>
+    ///   Anim Layer 상수 Index들
+    /// </summary>
+    public class AnimLayer
+    {
+        public static int BASE = 0;         ///< Base
     }
 
     public class String
@@ -91,6 +98,9 @@ public class R
         public static string SCENE_LOGIN = "Login";             ///< 로그인
         public static string SCENE_LOBBY = "Lobby";             ///< 로비
         public static string SCENE_GAME = "Game";               ///< Lv
+
+        /// Anim State
+        public static string ANIM_STATE_ROLL = "Roll";          ///< 구르기 상태
     }
 
     /// <summary>
