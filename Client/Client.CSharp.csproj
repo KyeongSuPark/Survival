@@ -89,6 +89,7 @@
     <Compile Include="Assets\02 Scripts\Etc\RangeValue.cs" />
     <Compile Include="Assets\02 Scripts\Etc\ScreenResolutionSetter.cs" />
     <Compile Include="Assets\02 Scripts\Etc\StateChangeEventArg.cs" />
+    <Compile Include="Assets\02 Scripts\Etc\Utils.cs" />
     <Compile Include="Assets\02 Scripts\Manager\Log.cs" />
     <Compile Include="Assets\02 Scripts\Options\DevelopOptions.cs" />
     <Compile Include="Assets\02 Scripts\Player\Player.cs" />

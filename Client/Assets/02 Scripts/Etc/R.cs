@@ -60,6 +60,16 @@ public enum eRps
 }
 
 /// <summary>
+///   가위 바위 보 대결 결과
+/// </summary>
+public enum eRpsCompareResult
+{
+    Win,        ///< 승리
+    Lose,       ///< 패배
+    Draw,       ///< 무승부
+}
+
+/// <summary>
 /// 전역 상수값들 선언
 /// 내부 클래스는 카테고리처럼 사용
 /// </summary>
@@ -71,6 +81,11 @@ public class R
     public class Const
     {
         public static int INDEX_NONE = -1;
+        public static int NORMAL_DAMAGE = 1;    ///< 일반 공격 Damage
+        public static int SPECIAL_DAMAGE = 2;   ///< Special 공격 Damage
+
+        public static float RESET_TIME = 3.0f;   ///< 가위 바위 보 졌을 때 reset 시간 (s)
+        public static float RESET_CYCLE = 30.0f; ///< 주기적으로 reset 시간 (s)
     }
 
     /// <summary>
@@ -120,5 +135,6 @@ public class R
         public static int STATE = Animator.StringToHash("State");
         public static int MOVE_STATE = Animator.StringToHash("MoveState");
         public static int ROLL = Animator.StringToHash("Roll");
+        public static int DIE = Animator.StringToHash("Die");
     }
 }

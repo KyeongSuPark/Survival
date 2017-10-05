@@ -59,7 +59,9 @@ public class LogFilterOption
             string str = File.ReadAllText(FilePath);
             JsonUtility.FromJsonOverwrite(str, this);
 
-            if(Filters.Length == 0)
+            //. eLogFilter 갯수가 다르거나 없다면 다시 생성한다.
+            if(Filters.Length == 0 ||
+                Filters.Length != Enum.GetValues(typeof(eLogFilter)).Length)
                 Filters = new bool[Enum.GetValues(typeof(eLogFilter)).Length];
         }
 #endif //. UNITY_EDITOR

@@ -95,4 +95,23 @@ public class Player : MonoBehaviour {
         m_State = newUnitState;
         m_State.OnStateEnter(_arg);
     }
+
+    /// <summary>
+    ///   사망
+    /// </summary>
+    public void Die()
+    {
+        //. 사망 Animation
+        m_Animator.SetTrigger(R.AnimHash.DIE);
+
+        //. Collider Disable
+        List<Collider> colliders = new List<Collider>();
+        GetComponentsInChildren<Collider>(colliders);
+        foreach(Collider col in colliders)
+            col.enabled = false;
+
+        //. UI 가린다.
+
+        //. 사망 UI 
+    }
 }

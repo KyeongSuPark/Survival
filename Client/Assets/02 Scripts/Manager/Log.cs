@@ -11,6 +11,7 @@ public enum eLogFilter : int
     Normal,         ///< 일반 로그
     State,          ///< 상태
     AnimTrigger,    ///< 애님 트리거
+    Player,         ///< 플레이어
 }   
 
 /// <summary>
