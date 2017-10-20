@@ -93,6 +93,7 @@
     <Compile Include="Assets\02 Scripts\Manager\Log.cs" />
     <Compile Include="Assets\02 Scripts\Options\DevelopOptions.cs" />
     <Compile Include="Assets\02 Scripts\Player\Player.cs" />
+    <Compile Include="Assets\02 Scripts\Player\PlayerHud.cs" />
     <Compile Include="Assets\02 Scripts\Player\PlayerOption.cs" />
     <Compile Include="Assets\02 Scripts\Player\PlayerStat.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\AbnormalState.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Assets\02 Scripts\Player\State\MoveState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\PlayerState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\RollState.cs" />
+    <Compile Include="Assets\02 Scripts\UI\BillboardCanvas.cs" />
     <Compile Include="Assets\08 ImportedAssets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\08 ImportedAssets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\08 ImportedAssets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />

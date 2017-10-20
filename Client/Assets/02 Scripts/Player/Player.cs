@@ -101,6 +101,8 @@ public class Player : MonoBehaviour {
     /// </summary>
     public void Die()
     {
+        Log.Print(eLogFilter.Player, string.Format("player die")); //. Todo 몇번 플레이어
+
         //. 사망 Animation
         m_Animator.SetTrigger(R.AnimHash.DIE);
 
