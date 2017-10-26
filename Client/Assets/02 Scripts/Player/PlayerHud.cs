@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHud : MonoBehaviour {
     public GameObject[] m_Rps;              ///< Rps Sprite Object
+
+    public Image m_CountryIcon;             ///< 국가 아이콘 Spirte
+    public Text m_NickName;                 ///< 닉 네임 Text
+    public HpBar m_HpBar;                   ///< HpBar
+    public GameObject m_HudCanvas;          ///< Hud Canvas
+
     private Coroutine m_SuffleCoroutine;     ///< Suffle 코루틴
     private Coroutine m_FlickerCoroutine;   ///< 점멸 코루틴
 
 	// Use this for initialization
 	void Start () {
         m_SuffleCoroutine = null;
-        m_FlickerCoroutine = null;
+        m_FlickerCoroutine = null;        
 	}
 	
 	// Update is called once per frame
@@ -106,6 +113,25 @@ public class PlayerHud : MonoBehaviour {
     }
 
     /// <summary>
+    ///   Hp 변경 콜백
+    ///   Hp 값 만큼 Hp bar guage를 변화 시킨다.
+    /// </summary>
+    public void OnChangedHp(RangeIntValue _Hp, int _delta)
+    {
+        float hpPercent = (float)_Hp.GetValue() / (float)_Hp.m_Max;
+        m_HpBar.SetFillAmount(hpPercent);
+
+        //. 데미지를 받은 거라면 UI 쉐이크
+        if (_delta < 0)
+        {
+            //. 1초 동안 0.2만큼씩 Shake한다.
+            Vector3 amp = new Vector3(0.2f, 0.2f, 0.0f);
+            ShakePosition.StartShake(m_HudCanvas, amp, 1.0f, true);
+        }
+          
+    }
+
+    /// <summary>
     ///   Suffle이 시작 됬을 때 호출 
     /// </summary>
     public void OnStartSuffle(float _duration)
@@ -132,5 +158,14 @@ public class PlayerHud : MonoBehaviour {
         
         //. 점멸 시작
         m_FlickerCoroutine = StartCoroutine(FlickerRpsSprite(_resultRps));
+    }
+
+    /// <summary>
+    ///   국가 아이콘을 셋팅 한다.
+    ///   해당 국가 코드가 없으면 보이지 않는다.
+    /// </summary>
+    public void SetCountryIcon(eCountry _contry)
+    {
+        //. 국가 아이콘 셋팅
     }
 }

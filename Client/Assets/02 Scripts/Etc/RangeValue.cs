@@ -20,17 +20,51 @@ public class RangeValue<T> where T : IComparable<T>
 [Serializable]
 public class RangeIntValue : RangeValue<int>
 {
+    /// <summary>
+    ///   값 변경 delegate
+    /// </summary>
+    /// <param name="_value">this</param>
+    /// <param name="_delta">변화량</param>
+    public delegate void ChangeValueEventHandler(RangeIntValue _value, int _delta); ///< 값 변경 델리게이트
+    public event ChangeValueEventHandler Changed;                                   ///< 값 변경 콜백 이벤트
+
     public override void SetValue(int _value)
     {
+        int oldValue = m_Value;
         m_Value = Mathf.Clamp(_value, m_Min, m_Max);
+        if (Changed != null && m_Value != oldValue)
+            Changed(this, m_Value - oldValue);
+    }
+
+    public void Add(int _value)
+    {
+        SetValue(m_Value + _value);
+    }
+
+    public void Sub(int _value)
+    {
+        SetValue(m_Value - _value);
     }
 }
 [Serializable]
 public class RangeFloatValue : RangeValue<float>
 {
+    public delegate void ChangeValueEventHandler(int _newValue);    ///< 값 변경 델리게이트
+    public event ChangeValueEventHandler Changed;                   ///< 값 변경 콜백 이벤트
+
     public override void SetValue(float _value)
     {
         m_Value = Mathf.Clamp(_value, m_Min, m_Max);
+    }
+
+    public void Add(int _value)
+    {
+        SetValue(m_Value + _value);
+    }
+
+    public void Sub(int _value)
+    {
+        SetValue(m_Value - _value);
     }
 }
 

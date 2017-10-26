@@ -70,6 +70,14 @@ public enum eRpsCompareResult
 }
 
 /// <summary>
+///   국가
+/// </summary>
+public enum eCountry
+{
+    Korea,
+}
+
+/// <summary>
 /// 전역 상수값들 선언
 /// 내부 클래스는 카테고리처럼 사용
 /// </summary>

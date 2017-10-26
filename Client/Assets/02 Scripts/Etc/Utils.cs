@@ -56,4 +56,13 @@ public class Utils {
         int randomValue = Random.Range((int)eRps.Rock, (int)eRps.Scissors + 1);
         return (eRps)randomValue;
     }
+
+    /// <summary>
+    ///   Floating point equal 비교 함수
+    /// </summary>
+    /// <param name="_precision">정밀도 - 소수점 몇째자리까지 유효한가</param>
+    public static bool NearlyEquals(float _a, float _b, float _precision = 0.0001f)
+    {
+        return (Mathf.Abs(_a - _b) <= _precision);
+    }
 }

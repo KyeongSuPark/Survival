@@ -7,18 +7,20 @@ public class PlayerStat : MonoBehaviour {
     public float m_OriginMaxVelocity;                ///< 능력치상 원래 최대 속도
     public RangeFloatValue m_Velocity;              ///< 속도
     public RangeIntValue m_Stamina;                 ///< 체력
+    public RangeIntValue m_Hp;                      ///< 생명력
 
     private bool m_bRecoveryStamina;                ///< 체력 회복 중인가?
     private bool m_bInvincible;                     ///< 무적인가?
 
     private List<eHiddenReason> m_HiddenReasons;    ///< hidden 되는 이유들
     private bool m_Ghost;                           ///< 유령 상태 (공격 하지도 받지도 못하는 상태) - 상태로 빼자
-    private int m_Life;                             ///< 생명력
     private eRps m_Rps;                             ///< 현재 가위 바위 보
     private eRps m_SpecialRps;                      ///< 내가 선택한 필살 가위 바위 보
 
     private PlayerHud m_PlayerHud;                  ///< PlayerHud
     private Coroutine m_SuffleCoroutine;             ///< Shuffle 코루틴
+
+    public eRps TestDesicionRps;   ///< 테스트 하기 편하게
 
     public int m_TempId;                            ///< 임시 아이디
     public float Velocity {
@@ -63,6 +65,7 @@ public class PlayerStat : MonoBehaviour {
 
     void Awake() {
         m_PlayerHud = GetComponent<PlayerHud>();
+        m_Hp.Changed += new RangeIntValue.ChangeValueEventHandler(m_PlayerHud.OnChangedHp);
     }
 
 	// Use this for initialization
@@ -72,7 +75,7 @@ public class PlayerStat : MonoBehaviour {
         m_SuffleCoroutine = StartCoroutine(ShuffleRps(R.Const.RESET_TIME));
 
         //. Test Value
-        m_Life = 3;
+        m_Hp.SetValue(5);
 	}
 	
 	// Update is called once per frame
@@ -100,7 +103,7 @@ public class PlayerStat : MonoBehaviour {
         if (otherStat != null)
         {
             //. 충돌 로그
-            Log.Print(eLogFilter.Player, string.Format("On trigger me:{1} other:{2}", Id, otherStat.Id));
+            Log.Print(eLogFilter.Player, string.Format("On trigger me:{0} other:{1}", Id, otherStat.Id));
             //. 무적 로그
             if (otherStat.Invincible == true || Invincible == true)
             {
@@ -120,16 +123,16 @@ public class PlayerStat : MonoBehaviour {
                 {
                     //. 상대편 special 가위 바위 보 연출
                     //. 생명력 감소
-                    m_Life -= R.Const.SPECIAL_DAMAGE;
+                    m_Hp.Sub(R.Const.SPECIAL_DAMAGE);
                 }
                 else
                 {
                     //. 생명력 감소
-                    m_Life -= R.Const.NORMAL_DAMAGE;
+                    m_Hp.Sub(R.Const.NORMAL_DAMAGE);
                 }
 
                 //. 사망 처리
-                if(m_Life <= 0)
+                if(m_Hp.GetValue() <= 0)
                 {
                     Player player = GetComponent<Player>();
                     player.Die();
@@ -145,7 +148,7 @@ public class PlayerStat : MonoBehaviour {
                 }              
             }
 
-            Log.Print(eLogFilter.Player, string.Format("compare rps me:{0} other:{1} result:{2} life:{3}", m_Rps, otherStat.Rps, result, m_Life));
+            Log.Print(eLogFilter.Player, string.Format("compare rps me:{0} other:{1} result:{2} life:{3}", m_Rps, otherStat.Rps, result, m_Hp));
         }
     }
 
@@ -175,7 +178,8 @@ public class PlayerStat : MonoBehaviour {
         yield return new WaitForSeconds(_duration);
      
         //. Rps 결정
-        m_Rps = Utils.DecisionRps();
+        // m_Rps = Utils.DecisionRps();
+        m_Rps = TestDesicionRps;
 
         //. Hud에 Rps 결정을 알림
         m_PlayerHud.OnDecisionRps(m_Rps);
