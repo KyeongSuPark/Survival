@@ -6,8 +6,11 @@ public class Player : MonoBehaviour {
     private Rigidbody m_Rigidbody = null;
     private Animator m_Animator = null;     ///< 애니메이터
     private PlayerState m_State = null;     ///< 현재 상태
+    private eCountry m_eCountry;            ///< 국가 코드
 
     private Dictionary<ePlayerState, PlayerState> m_StateCache = null;  ///< 플레이어 상태 캐쉬
+
+    public eCountry Country{ get { return m_eCountry; } }
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,9 @@ public class Player : MonoBehaviour {
 
         //. 초기 스테이트 설정
         ChangeState(ePlayerState.Idle);
+
+        //. 테스트 값
+        m_eCountry = eCountry.Korea;
 	}
 	
 	// Update is called once per frame

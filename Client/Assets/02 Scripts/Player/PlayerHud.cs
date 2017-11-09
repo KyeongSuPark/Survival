@@ -13,11 +13,14 @@ public class PlayerHud : MonoBehaviour {
 
     private Coroutine m_SuffleCoroutine;     ///< Suffle 코루틴
     private Coroutine m_FlickerCoroutine;   ///< 점멸 코루틴
+    private Player m_Player;
 
 	// Use this for initialization
 	void Start () {
         m_SuffleCoroutine = null;
-        m_FlickerCoroutine = null;        
+        m_FlickerCoroutine = null;
+        m_Player = GetComponent<Player>();
+        SetCountryIcon(m_Player.Country);
 	}
 	
 	// Update is called once per frame
@@ -167,5 +170,12 @@ public class PlayerHud : MonoBehaviour {
     public void SetCountryIcon(eCountry _contry)
     {
         //. 국가 아이콘 셋팅
+        Sprite icon = ResourceManager.Instance.FindOrLoadCountryIcon(_contry);
+        if (icon == null)
+        {
+            m_CountryIcon.gameObject.SetActive(false);
+            return;
+        }
+        m_CountryIcon.sprite = icon;
     }
 }

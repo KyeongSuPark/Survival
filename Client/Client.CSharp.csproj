@@ -92,6 +92,7 @@
     <Compile Include="Assets\02 Scripts\Etc\StateChangeEventArg.cs" />
     <Compile Include="Assets\02 Scripts\Etc\Utils.cs" />
     <Compile Include="Assets\02 Scripts\Manager\Log.cs" />
+    <Compile Include="Assets\02 Scripts\Manager\ResourceManager.cs" />
     <Compile Include="Assets\02 Scripts\Options\DevelopOptions.cs" />
     <Compile Include="Assets\02 Scripts\Player\Player.cs" />
     <Compile Include="Assets\02 Scripts\Player\PlayerHud.cs" />

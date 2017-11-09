@@ -14,7 +14,7 @@ public class SmoothFollow : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		if(m_Target)
         {
             Vector3 newPos = transform.position;

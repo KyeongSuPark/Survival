@@ -137,6 +137,9 @@ public class R
 
         /// Toon Lit Ramp Texture
         public static string RESOURCE_TOON_LIT_RAMP_TEX = @"Textures/ToonLitRamp";
+
+        /// 국가 아이콘 패스
+        public static string COUNTRY_ICON_FOLDER = @"Sprites/CountryIcons/";
     }
 
     public class AnimHash
