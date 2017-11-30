@@ -144,6 +144,8 @@
     <Compile Include="Assets\08 ImportedAssets\Standard Assets\Editor\Water\Water4\SpecularLightingEditor.cs" />
     <Compile Include="Assets\08 ImportedAssets\Standard Assets\Editor\Water\Water4\WaterBaseEditor.cs" />
     <Compile Include="Assets\08 ImportedAssets\Standard Assets\Editor\Water\Water4\WaterEditorUtility.cs" />
+    <Compile Include="Assets\08 ImportedAssets\TornadoBanditsStudio\Editor\TBS_EditorInitializer.cs" />
+    <Compile Include="Assets\08 ImportedAssets\TornadoBanditsStudio\Editor\TBS_PresentationWindow.cs" />
     <Compile Include="Assets\Editor\EditorPlayMode.cs" />
     <Compile Include="Assets\Editor\EditorPlayModeEvent.cs" />
     <Compile Include="Assets\Editor\EditorR.cs" />

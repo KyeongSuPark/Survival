@@ -219,6 +219,8 @@
     <Compile Include="Assets\08 ImportedAssets\Toon Character Pack\Scripts\GameObjectSpawner_Characters.cs" />
     <Compile Include="Assets\08 ImportedAssets\Toon Character Pack\Scripts\SmoothCameraOrbit.cs" />
     <Compile Include="Assets\08 ImportedAssets\Toon Character Pack\Scripts\ToonCharacterController.cs" />
+    <Compile Include="Assets\08 ImportedAssets\TornadoBanditsStudio\Low Poly Free Pack\Scripts\TBS_CameraMovement.cs" />
+    <Compile Include="Assets\08 ImportedAssets\TornadoBanditsStudio\Low Poly Free Pack\Water\TBS_Water.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\08 ImportedAssets\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />

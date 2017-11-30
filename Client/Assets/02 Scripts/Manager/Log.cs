@@ -18,25 +18,21 @@ public enum eLogFilter : int
 /// Log를 관리 하는 객체
 /// 현재는 필터만 적용
 /// </summary>
-public class Log : MonoBehaviour {
-    public static Log Instance = null;
+public class Log {
+    private static Log m_Instance = null;
+    public static Log Instance 
+    {
+        get
+        {
+            if (m_Instance == null)
+                m_Instance = new Log();
+            return m_Instance;
+        }
+    }
     public bool[] Filters
     {
         get { return DevelopOptions.LogFilter.Filters; }
     }
-
-    void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else 
-            Debug.LogError("Log has two instances");
-    }
-
-    void Start()
-    {
-        DontDestroyOnLoad(this);
-    } 
 
     public static void PrintError(eLogFilter _filter, object _message)
     {
