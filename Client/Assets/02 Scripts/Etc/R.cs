@@ -89,12 +89,15 @@ public class R
     public class Const
     {
         public static int INDEX_NONE = -1;
-        public static int NORMAL_DAMAGE = 1;    ///< 일반 공격 Damage
-        public static int SPECIAL_DAMAGE = 2;   ///< Special 공격 Damage
-        public static int SHUFFLE_FREQUENCY = 60;///< Shuffle 주기 (주어진 시간동안 Shuffle되는 횟수)
+        public static int NORMAL_DAMAGE = 1;            ///< 일반 공격 Damage
+        public static int SPECIAL_DAMAGE = 2;           ///< Special 공격 Damage
+        public static int SHUFFLE_FREQUENCY = 60;       ///< Shuffle 주기 (주어진 시간동안 Shuffle되는 횟수)
 
-        public static float RESET_TIME = 3.0f;   ///< 가위 바위 보 졌을 때 reset 시간 (s)
-        public static float RESET_CYCLE = 30.0f; ///< 주기적으로 reset 시간 (s)
+        public static float RESET_TIME = 3.0f;           ///< 가위 바위 보 졌을 때 reset 시간 (s)
+        public static float RESET_CYCLE = 30.0f;         ///< 주기적으로 reset 시간 (s)
+
+        public static int INVALID_BUSH_ID = 0;          ///< 유효하지 않은 부쉬 Id
+        public static int INVALID_PLAYER_ID = 0;        ///< 유효하지 않은 Player Id                                                        
     }
 
     /// <summary>
@@ -117,6 +120,7 @@ public class R
         public static string INPUT_JUMP = "Jump";               ///< Jump (Roll)
 
         /// Tag       
+        public static string TAG_PLAYER = "Player";             ///< Player
 
         /// Scene
         public static string SCENE_LOGIN = "Login";             ///< 로그인

@@ -91,7 +91,10 @@
     <Compile Include="Assets\02 Scripts\Etc\ShakePosition.cs" />
     <Compile Include="Assets\02 Scripts\Etc\StateChangeEventArg.cs" />
     <Compile Include="Assets\02 Scripts\Etc\Utils.cs" />
+    <Compile Include="Assets\02 Scripts\Item\Item.cs" />
+    <Compile Include="Assets\02 Scripts\Manager\BushManager.cs" />
     <Compile Include="Assets\02 Scripts\Manager\Log.cs" />
+    <Compile Include="Assets\02 Scripts\Manager\ObjectManager.cs" />
     <Compile Include="Assets\02 Scripts\Manager\ResourceManager.cs" />
     <Compile Include="Assets\02 Scripts\Options\DevelopOptions.cs" />
     <Compile Include="Assets\02 Scripts\Player\Player.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Assets\02 Scripts\Player\State\MoveState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\PlayerState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\RollState.cs" />
+    <Compile Include="Assets\02 Scripts\Props\Bush.cs" />
     <Compile Include="Assets\02 Scripts\UI\BillboardCanvas.cs" />
     <Compile Include="Assets\08 ImportedAssets\Pixelplacement\iTween\iTween.cs" />
     <Compile Include="Assets\08 ImportedAssets\Pixelplacement\iTween\Sample\MoveSample.cs" />

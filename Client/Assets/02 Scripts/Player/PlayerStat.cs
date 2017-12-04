@@ -17,6 +17,7 @@ public class PlayerStat : MonoBehaviour {
     private eRps m_Rps;                             ///< 현재 가위 바위 보
     private eRps m_SpecialRps;                      ///< 내가 선택한 필살 가위 바위 보
 
+    private Player m_Owner;                         ///< Player
     private PlayerHud m_PlayerHud;                  ///< PlayerHud
     private Coroutine m_SuffleCoroutine;             ///< Shuffle 코루틴
 
@@ -64,7 +65,9 @@ public class PlayerStat : MonoBehaviour {
     }
 
     void Awake() {
+        m_Owner = GetComponent<Player>();
         m_PlayerHud = GetComponent<PlayerHud>();
+        m_HiddenReasons = new List<eHiddenReason>();
         m_Hp.Changed += new RangeIntValue.ChangeValueEventHandler(m_PlayerHud.OnChangedHp);
     }
 
@@ -98,6 +101,10 @@ public class PlayerStat : MonoBehaviour {
 
     void OnTriggerEnter(Collider _other)
     {
+        //. 플레이어끼리 충돌 아니면 Return
+        if (_other.tag != R.String.TAG_PLAYER)
+            return;
+
         //. 다른 플레이어와 충돌했다면 
         PlayerStat otherStat = _other.GetComponent<PlayerStat>();
         if (otherStat != null)
@@ -218,6 +225,41 @@ public class PlayerStat : MonoBehaviour {
         if (m_Stamina.GetValue() <= 0)
             return true;
         
+        return false;
+    }
+
+    /// <summary>
+    /// hidden reason 추가
+    /// </summary>
+    public void AddHiddenReason(eHiddenReason _reason)
+    {
+        //. 이미 있나?
+        if (m_HiddenReasons.Contains(_reason))
+            return;
+
+        //. 없으면 추가 후 hidden 상태 갱신
+        m_HiddenReasons.Add(_reason);
+        m_Owner.UpdateHiddenState();
+    }
+
+    public void RemoveHiddenReason(eHiddenReason _reason)
+    {
+        //. 없으면 Nothing
+        if (m_HiddenReasons.Contains(_reason) == false)
+            return;
+
+        //. 있으면 제거 후 hidden 상태 갱신
+        m_HiddenReasons.Remove(_reason);
+        m_Owner.UpdateHiddenState();
+    }
+
+    /// <summary>
+    /// hidden reason이 하나라도 있나??
+    /// </summary>
+    public bool HasAnyHiddenReason()
+    {
+        if (m_HiddenReasons.Count > 0)
+            return true;
         return false;
     }
 }

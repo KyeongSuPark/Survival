@@ -7,16 +7,34 @@ public class Player : MonoBehaviour {
     private Animator m_Animator = null;     ///< 애니메이터
     private PlayerState m_State = null;     ///< 현재 상태
     private eCountry m_eCountry;            ///< 국가 코드
+    private PlayerStat m_Stat;              ///< 스탯
+    public bool m_bLocal;
+    public int m_TempId;
+    //private bool m_bLocal;                  ///< Local Player 유무
 
     private Dictionary<ePlayerState, PlayerState> m_StateCache = null;  ///< 플레이어 상태 캐쉬
 
     public eCountry Country{ get { return m_eCountry; } }
+    public bool IsLocal { get { return m_bLocal; } }
+    public int Id { get { return m_TempId; } }
+    public PlayerStat Stat { get { return m_Stat; } }
+
+    void Awake()
+    {
+        ObjectManager.Instance.OnCreatePlayer(this);
+    }
+
+    void OnDestroy()
+    {
+        ObjectManager.Instance.OnDestroyPlayer(this);
+    }
 
 	// Use this for initialization
 	void Start () {
         m_StateCache = new Dictionary<ePlayerState, PlayerState>();
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Stat = GetComponent<PlayerStat>();
 
         //. Toon Rendering 잘 나오게 Ramp 설정
         SetRampTexture();
@@ -121,5 +139,38 @@ public class Player : MonoBehaviour {
         //. UI 가린다.
 
         //. 사망 UI 
+    }
+
+    /// <summary>
+    /// 캐릭터 Visibile 설정
+    /// </summary>
+    /// <param name="_visible"></param>
+    public void SetVisible(bool _visible)
+    {
+        //. Renderer
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach(var renderer in renderers)
+            renderer.enabled = _visible;
+
+        //. Canvas
+        Canvas[] canvases = GetComponentsInChildren<Canvas>();
+        foreach (var canvas in canvases)
+            canvas.enabled = _visible;
+
+        //. Projector
+        Projector projector = GetComponentInChildren<Projector>();
+        projector.enabled = _visible;
+    }
+
+    /// <summary>
+    /// Hidden 상태를 갱신한다.
+    /// </summary>
+    public void UpdateHiddenState()
+    {
+        //. hidden 해야 할 이유가 하나라도 있으면 hide
+        if (m_Stat.HasAnyHiddenReason())
+            SetVisible(false);
+        else
+            SetVisible(true);
     }
 }
