@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class ResourceManager : MonoBehaviour {
 
     public static ResourceManager Instance = null;
+    public SpriteAtlas m_ItemAtlas;
 
+    private Dictionary<string, Sprite> m_ItemIcons;          ///< 아이템 아이콘 < key:IconName >
     private Dictionary<eCountry, Sprite> m_CountryIcons;     ///< 국가 아이콘
+    private Dictionary<string, GameObject> m_ItemPrefabs;    ///< 아이템 프리팹 < key:PrefabName >
 
     void Awake()
     {
@@ -16,6 +20,8 @@ public class ResourceManager : MonoBehaviour {
             Debug.LogError("Log has two instances");
 
         m_CountryIcons = new Dictionary<eCountry, Sprite>();
+        m_ItemPrefabs = new Dictionary<string, GameObject>();
+        m_ItemIcons = new Dictionary<string, Sprite>();
     }
 
     /// <summary>
@@ -34,5 +40,41 @@ public class ResourceManager : MonoBehaviour {
 
         m_CountryIcons.Add(_country, icon);
         return icon;
+    }
+
+    /// <summary>
+    /// 아이템 아이콘 이름으로 검색
+    /// </summary>
+    public Sprite FindItemIcon(string _iconName)
+    {
+        //. Cache된게 있다면 그걸로 사용
+        if (m_ItemIcons.ContainsKey(_iconName))
+            return m_ItemIcons[_iconName];
+
+        //. 없으면 Sprite에서 가져온다.        
+        Sprite icon = m_ItemAtlas.GetSprite(_iconName);
+        if (icon == null)
+            return null;
+
+        //. 잘 가져왔으면 캐쉬해둔다.
+        m_ItemIcons.Add(_iconName, icon);
+        return icon;
+    }
+
+    /// <summary>
+    /// 아이템 프리팹 검색 (없으면 로드한 후 캐쉬한다.)
+    /// </summary>
+    public GameObject FindOrLoadItemPrefab(string _prefabName)
+    {
+        if (m_ItemPrefabs.ContainsKey(_prefabName))
+            return m_ItemPrefabs[_prefabName];
+
+        string path = string.Format("{0}{1}", R.Path.ITEM_PREFAB_FOLDER, _prefabName);
+        GameObject prefab = Resources.Load<GameObject>(path);
+        if (prefab == null)
+            return null;
+
+        m_ItemPrefabs.Add(_prefabName, prefab);
+        return prefab;
     }
 }

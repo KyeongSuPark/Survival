@@ -1,0 +1,12 @@
+Id,Name,EffectType,Value,Comment
+1,Fetter,Fetter,1500,속박 
+2,ChangeRps,ChangeRps,0,가위바위보 변경
+3,Hide,Hide,5000,은신 
+4,Hp_1,Heal,1,회복
+5,Hp_2,Heal,2,회복2
+6,Hp_3,Heal,3,회복3
+7,Shield,Shield,10,10초간 무적
+8,Transformation,Transformation,0,변신
+9,Slow_30,Slow,30,Max 속도가 30%로 준다.
+10,Haste_150,Haste,150,Max 속도가 150%로 증가
+11,Stamina_50,Stamina,50,Max 스태미너 50% 회복

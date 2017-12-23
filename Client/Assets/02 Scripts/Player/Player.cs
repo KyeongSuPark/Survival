@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
     private PlayerState m_State = null;     ///< 현재 상태
     private eCountry m_eCountry;            ///< 국가 코드
     private PlayerStat m_Stat;              ///< 스탯
+    private Item m_Item;                    ///< 습득한 아이템 데이터
+    [SerializeField]                                 
+    private Transform m_FirePos;             ///< 발사체 위치
     public bool m_bLocal;
     public int m_TempId;
     //private bool m_bLocal;                  ///< Local Player 유무
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour {
     public bool IsLocal { get { return m_bLocal; } }
     public int Id { get { return m_TempId; } }
     public PlayerStat Stat { get { return m_Stat; } }
+    public Transform FirePos { get { return m_FirePos; } }
 
     void Awake()
     {
@@ -51,6 +55,13 @@ public class Player : MonoBehaviour {
     {
         if (m_State != null)
             m_State.Update();
+
+        //. Test
+        if (Input.GetButtonDown(R.String.INPUT_JUMP))
+        {
+            OnPickupItem(1);
+            UseItem();
+        }
 	}
 
     void LateUpdate()
@@ -172,5 +183,31 @@ public class Player : MonoBehaviour {
             SetVisible(false);
         else
             SetVisible(true);
+    }
+
+    /// <summary>
+    /// 현재 습득한 아이템을 사용한다.
+    /// </summary>
+    public void UseItem()
+    {
+        if (m_Item == null)
+            return;
+
+        m_Item.Use();
+        //. Todo .UI 처리
+        m_Item = null;  //. 사용했으면 지워준다.
+    }
+
+    /// <summary>
+    /// 아이템을 줏었을 때 호출
+    /// </summary>
+    public void OnPickupItem(int _itemId)
+    {
+        TblItem tblItem = TableDataManager.Find<TblItem>(_itemId);
+        if (tblItem == null)
+            return;
+
+        m_Item = Item.Create(tblItem, Id);
+        //. Todo UI 처리 
     }
 }

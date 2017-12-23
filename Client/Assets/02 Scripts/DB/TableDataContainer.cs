@@ -37,10 +37,13 @@ public class TableDataContainer{
                 return;
 
             string line;
-            do
+            while(true)
 	        {
                 //. value 부분 읽어 온다.
 	            line = reader.ReadLine();
+                if (line == null)
+                    break;
+
                 string[] values = line.Split(',');
 
                 //. header와 같지 않다면 데이터 문제
@@ -57,48 +60,13 @@ public class TableDataContainer{
                 if (row == null)
                     continue;
 
-                //. field 에 값을 채운다.
+                //. looup을 참조하여 field 에 값을 채운다.
                 Type t = row.GetType();
-                FieldInfo[] fields = t.GetFields();
-                foreach(var field in fields)
-                {
-                    if(lookUp.ContainsKey(field.Name) == false)
-                        continue;
-                    
-                    string csvValue = lookUp[field.Name]; //. csv 값
-                    if (csvValue == string.Empty)
-                        continue;
-
-                    object variable = field.GetValue(row); //. 변수
-                    if(variable is int)
-                    {
-                        field.SetValue(row, int.Parse(csvValue));
-                    }
-                    else if(variable is string)
-                    {
-                        field.SetValue(row, csvValue);
-                    }
-                    else if(variable is float)
-                    {
-                        field.SetValue(row, float.Parse(csvValue));
-                    }
-                    else if(variable is Enum)
-                    {
-                        foreach(var enumValue in Enum.GetValues(variable.GetType()))
-                        {
-                            if(csvValue.Equals(enumValue.ToString(), StringComparison.OrdinalIgnoreCase))
-                            {
-                                field.SetValue(row, enumValue);
-                                break;
-                            }
-                        }
-                    }
-                }
+                FillFields(row, t, ref lookUp);
 
                 //. 캐쉬
                 m_Datas.Add(row.Id, row);
-            } while (line != null); 
-            
+            }
         }
     }
 
@@ -109,11 +77,61 @@ public class TableDataContainer{
         return null;
     }
 
+    /// <summary>
+    /// row 의 field를 type으로 부터 유추하여 
+    /// lookup 에 있는 값으로 채워준다.
+    /// </summary>
+    /// <param name="_row">테이블 row</param>
+    /// <param name="_type">실제 인스턴스 클래스 타입</param>
+    /// <param name="_lookUp">값이 들어있는 looup 테이블</param>
+    private void FillFields(TblBase _row, Type _type, ref Dictionary<string, string> _lookUp)
+    {
+        FieldInfo[] fields = _type.GetFields();
+        foreach (var field in fields)
+        {
+            if (_lookUp.ContainsKey(field.Name) == false)
+            {
+                Log.PrintError(eLogFilter.Table, string.Format("field not in lookup type:{0} field:{1}", _type.ToString(), field.Name));
+                continue;
+            }
+
+            string csvValue = _lookUp[field.Name]; //. csv 값
+            if (csvValue == string.Empty)
+            {
+                Log.PrintError(eLogFilter.Table, string.Format("lookup table has empty value type:{0} field:{1}", _type.ToString(), field.Name));
+                continue;
+            }
+
+            object variable = field.GetValue(_row); //. 변수
+            if (variable is int)
+            {
+                field.SetValue(_row, int.Parse(csvValue));
+            }
+            else if (variable is string)
+            {
+                field.SetValue(_row, csvValue);
+            }
+            else if (variable is float)
+            {
+                field.SetValue(_row, float.Parse(csvValue));
+            }
+            else if (variable is Enum)
+            {
+                foreach (var enumValue in Enum.GetValues(variable.GetType()))
+                {
+                    if (csvValue.Equals(enumValue.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        field.SetValue(_row, enumValue);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     private TextAsset GetTextAsset(eTableType _type)
     {
         string path = string.Format("{0}{1}", R.Path.TABLE_DATA_FOLDER, _type.ToString());
-        var testResult = Resources.Load(path);
-
         return Resources.Load<TextAsset>(path);
     }
 

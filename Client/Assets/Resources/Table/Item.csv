@@ -1,0 +1,13 @@
+Id,Name,UseType,Icon,Prefab,ItemEffectId,Comment
+1,Lasso,Projectile,Lasso,Lasso,1,올가미
+2,Rps,Use,ChangeRps,,2,가위바위보 변경
+3,HidePotion,Use,HidePotion,,3,투명 물약
+4,HpPotion_s,Use,HpPotion_S,,4,회복 물약_S
+5,HpPotion_m,Use,HpPotion_M,,5,회복 물약_M
+6,HpPotion_l,Use,HpPotion_L,,6,회복 물약_L
+7,Shield,Use,Shield,,7,방패
+8,Transformation,Use,Transformation,,8,은폐(변신)
+9,Glue,Trap,Glue,Glue,9,접착제
+10,Trap,Trap,Trap,Trap,1,덫
+11,HastePotion,Use,HastePotion,,10,스피드 물약
+12,StaminaPotion,Use,StaminaPotion,,11,체력 물약

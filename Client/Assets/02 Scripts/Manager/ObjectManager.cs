@@ -26,21 +26,32 @@ public class ObjectManager : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Player Awake될 때 호출
+    /// </summary>
     public void OnCreatePlayer(Player _player)
     {
         m_Players.Add(_player.Id, _player);
     }
 
+    /// <summary>
+    /// Player Destory될 때 호출
+    /// </summary>
     public void OnDestroyPlayer(Player _player)
     {
         m_Players.Remove(_player.Id);
     }
 
-    public Player FindPlayer(int _playerId) 
+    private Player InternalFindPlayer(int _playerId) 
     {
         if (m_Players.ContainsKey(_playerId) == false)
             return null;
 
         return m_Players[_playerId];
+    }
+
+    public static Player FindPlayer(int _playerId)
+    {
+        return Instance.InternalFindPlayer(_playerId);
     }
 }

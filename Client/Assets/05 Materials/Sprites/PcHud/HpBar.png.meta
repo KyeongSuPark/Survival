@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bc92580440224dc4796ed09041c3dc58
-timeCreated: 1508710907
+guid: 094e7d4cfbba34148b2b4474a6afea0d
+timeCreated: 1508669946
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -56,7 +56,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -64,7 +64,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -72,7 +72,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: iPhone
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -80,7 +80,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -92,7 +92,7 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-  spritePackingTag: CountryFlags
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 

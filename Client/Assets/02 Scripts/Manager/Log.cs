@@ -12,6 +12,8 @@ public enum eLogFilter : int
     State,          ///< 상태
     AnimTrigger,    ///< 애님 트리거
     Player,         ///< 플레이어
+    Table,          ///< 테이블
+    Item,           ///< 아이템
 }   
 
 /// <summary>

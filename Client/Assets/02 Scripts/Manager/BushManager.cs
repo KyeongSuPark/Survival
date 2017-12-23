@@ -72,7 +72,7 @@ public class BushManager : MonoBehaviour {
             //. 같은 부쉬에 있는 애들을 보여준다.
             foreach(var playerId in enteredPlayerIds)
             {
-                Player player = ObjectManager.Instance.FindPlayer(playerId);
+                Player player = ObjectManager.FindPlayer(playerId);
                 if (player != null)
                     player.Stat.RemoveHiddenReason(eHiddenReason.Bush);
             }
@@ -84,7 +84,7 @@ public class BushManager : MonoBehaviour {
             bool bSameBush = false;
             foreach (var playerId in enteredPlayerIds)
             {
-                Player player = ObjectManager.Instance.FindPlayer(playerId);
+                Player player = ObjectManager.FindPlayer(playerId);
                 if (player != null && player.IsLocal)
                 {
                     bSameBush = true;
@@ -116,7 +116,7 @@ public class BushManager : MonoBehaviour {
             //. 같은 부쉬에 있던 애들을 가려준다
             foreach (var playerId in enteredPlayerIds)
             {
-                Player player = ObjectManager.Instance.FindPlayer(playerId);
+                Player player = ObjectManager.FindPlayer(playerId);
                 if (player != null)
                     player.Stat.AddHiddenReason(eHiddenReason.Bush);
             }

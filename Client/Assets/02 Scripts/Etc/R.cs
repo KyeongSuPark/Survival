@@ -78,6 +78,42 @@ public enum eCountry
 }
 
 /// <summary>
+/// 아이템 어떤식으로 사용하냐에 따른 분류
+/// </summary>
+public enum eItemUseType
+{
+    Use,            ///< 즉시 사용
+    Projectile,     ///< 발사체
+    Trap,           ///< 설치 류
+}
+
+/// <summary>
+/// 아이템 효과 종류
+/// </summary>
+public enum eItemEffect
+{
+    Fetter,     ///< 속박
+    ChangeRps,  ///< Rps 변경
+    Hide,       ///< 은신
+    Heal,       ///< Hp 회복
+    Shield,     ///< 방어
+    Transform,  ///< 변신
+    Slow,       ///< 슬로우
+    Haste,      ///< 헤이스트
+    Stamina,    ///< 체력 회복
+}
+
+/// <summary>
+/// 테이블 데이터 종류
+/// </summary>
+public enum eTableType
+{
+    Item,           ///< 아이템
+    ItemEffect,     ///< 아이템 효과
+    Max,
+}
+
+/// <summary>
 /// 전역 상수값들 선언
 /// 내부 클래스는 카테고리처럼 사용
 /// </summary>
@@ -121,6 +157,7 @@ public class R
 
         /// Tag       
         public static string TAG_PLAYER = "Player";             ///< Player
+        public static string TAG_OBSTACLE = "Obstacle";         ///< 장애물
 
         /// Scene
         public static string SCENE_LOGIN = "Login";             ///< 로그인
@@ -144,6 +181,12 @@ public class R
 
         /// 국가 아이콘 패스
         public static string COUNTRY_ICON_FOLDER = @"Sprites/CountryIcons/";
+
+        /// 아이템 프리팹 패스 (리소스)
+        public static string ITEM_PREFAB_FOLDER = @"Item/Prefabs/";
+
+        /// 테이블 데이터 패스 (리소스)
+        public static string TABLE_DATA_FOLDER = @"Table/";
     }
 
     public class AnimHash
