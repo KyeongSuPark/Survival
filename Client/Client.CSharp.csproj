@@ -112,6 +112,16 @@
     <Compile Include="Assets\02 Scripts\Player\State\MoveState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\PlayerState.cs" />
     <Compile Include="Assets\02 Scripts\Player\State\RollState.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\AnalepticEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\ChangeRpsEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\FetterEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\HasteEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\HealEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\HideEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\ShieldEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\SlowEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\StateEffectBase.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\TransformEffect.cs" />
     <Compile Include="Assets\02 Scripts\Props\Bush.cs" />
     <Compile Include="Assets\02 Scripts\UI\BillboardCanvas.cs" />
     <Compile Include="Assets\08 ImportedAssets\Pixelplacement\iTween\iTween.cs" />

@@ -100,7 +100,7 @@ public enum eItemEffect
     Transform,  ///< 변신
     Slow,       ///< 슬로우
     Haste,      ///< 헤이스트
-    Stamina,    ///< 체력 회복
+    Analeptic,  ///< 체력 회복
 }
 
 /// <summary>
@@ -195,5 +195,6 @@ public class R
         public static int MOVE_STATE = Animator.StringToHash("MoveState");
         public static int ROLL = Animator.StringToHash("Roll");
         public static int DIE = Animator.StringToHash("Die");
+        public static int ABNORMAL = Animator.StringToHash("Abnormal");
     }
 }

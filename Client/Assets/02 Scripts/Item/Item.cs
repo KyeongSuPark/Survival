@@ -52,7 +52,10 @@ public class Item
         //. 즉시 나한테 효과 발동
         else
         {
-            
+            TblItemEffect tblEffect = TableDataManager.Find<TblItemEffect>(m_TblItem.ItemEffectId);
+            Player owner = ObjectManager.FindPlayer(m_OwnerId);
+            if (owner != null && tblEffect != null)
+                owner.AddStateEffect(tblEffect);
         }
     }
 

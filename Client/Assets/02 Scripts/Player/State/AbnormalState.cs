@@ -16,7 +16,8 @@ public class AbnormalState : PlayerState {
 
     public override void OnStateEnter(StateChangeEventArg _arg = null)
     {
-        
+        m_Animator.SetTrigger(R.AnimHash.ABNORMAL);
+        m_Stat.Velocity = 0.0f;
     }
 
     public override void OnStateExit()

@@ -36,6 +36,7 @@ public class TblItemEffect : TblBase
 {
     public string Name;              ///< 효과 이름
     public eItemEffect EffectType;   ///< 효과 종류
+    public int Duration;             ///< 효과가 유지되는 시간
     public int Value;                ///< 종류별 사용할 값
     
     public TblItemEffect()

@@ -18,7 +18,14 @@ public class ItemInstance : MonoBehaviour
         //. 플레이어
         if(_other.tag == R.String.TAG_PLAYER)
         {
-            //. 효과 발동
+            //. 다른 플레이어와 충돌
+            Player otherPlayer = _other.GetComponent<Player>();
+            if (otherPlayer != null)
+            {
+                //. 효과 발동
+                Log.Print(eLogFilter.Item, string.Format("ItemInstance.OnTriggerEnter >> owner:{0} other:{1}", m_OwnerId, otherPlayer.Id));
+                otherPlayer.AddStateEffect(m_TblEffect);
+            }
         }
         //. 장애물
         else if(_other.tag == R.String.TAG_OBSTACLE)

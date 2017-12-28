@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
     //private bool m_bLocal;                  ///< Local Player 유무
 
     private Dictionary<ePlayerState, PlayerState> m_StateCache = null;  ///< 플레이어 상태 캐쉬
+    private Dictionary<eItemEffect, StateEffectBase> m_StateEffects = null;
 
     public eCountry Country{ get { return m_eCountry; } }
     public bool IsLocal { get { return m_bLocal; } }
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour {
     void Awake()
     {
         ObjectManager.Instance.OnCreatePlayer(this);
+        m_StateCache = new Dictionary<ePlayerState, PlayerState>();
+        m_StateEffects = new Dictionary<eItemEffect, StateEffectBase>();
     }
 
     void OnDestroy()
@@ -35,7 +38,6 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        m_StateCache = new Dictionary<ePlayerState, PlayerState>();
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Stat = GetComponent<PlayerStat>();
@@ -209,5 +211,43 @@ public class Player : MonoBehaviour {
 
         m_Item = Item.Create(tblItem, Id);
         //. Todo UI 처리 
+    }
+
+    /// <summary>
+    /// 상태 효과 추가
+    /// </summary>
+    public void AddStateEffect(TblItemEffect _tblEffect)
+    {
+        eItemEffect effect = _tblEffect.EffectType;
+        //. 가지고 있나??
+        if(HasStateEffect(effect))
+        {
+            //. 시간만 리셋한다.
+            m_StateEffects[effect].ResetTimer();
+        }
+        //. 없으면 새로 추가한다.
+        else
+        {
+            StateEffectBase newEffect = StateEffectBase.Create(gameObject, _tblEffect);
+            m_StateEffects.Add(effect, newEffect);
+        }
+    }
+
+    /// <summary>
+    /// 상태 효과 제거
+    /// </summary>
+    public void RemoveStateEffect(eItemEffect _effect)
+    {
+        m_StateEffects.Remove(_effect);
+    }
+
+    /// <summary>
+    /// 상태효과를 가지고 있나??
+    /// </summary>
+    public bool HasStateEffect(eItemEffect _effect)
+    {
+        if (m_StateEffects.ContainsKey(_effect))
+            return true;
+        return false;
     }
 }

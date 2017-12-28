@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour {
+    /// <summary>
+    ///  Rps 대결 결과가 결정되었을 때 호출되는 이벤트
+    /// </summary>
+    public delegate void DecisionRpsCompareEventHandler(PlayerStat _winner, PlayerStat _loser);    
+    public event DecisionRpsCompareEventHandler DecidedRpsCompare;                                           
+
     public float m_Accel;                            ///< 가속 Offset
     public float m_OriginMaxVelocity;                ///< 능력치상 원래 최대 속도
     public RangeFloatValue m_Velocity;              ///< 속도
@@ -11,6 +17,7 @@ public class PlayerStat : MonoBehaviour {
 
     private bool m_bRecoveryStamina;                ///< 체력 회복 중인가?
     private bool m_bInvincible;                     ///< 무적인가?
+    private bool m_bShield;                         ///< 쉴드중인가? (공격 받았을 때 무효화 처리)
 
     private List<eHiddenReason> m_HiddenReasons;    ///< hidden 되는 이유들
     private bool m_Ghost;                           ///< 유령 상태 (공격 하지도 받지도 못하는 상태) - 상태로 빼자
@@ -44,6 +51,12 @@ public class PlayerStat : MonoBehaviour {
         get { return m_Stamina.GetValue(); }
     }
 
+    public bool Shield
+    {
+        get { return m_bShield; }
+        set { m_bShield = value; }
+    }
+
     public float Accel {
         get { return m_Accel; }
     }
@@ -75,6 +88,7 @@ public class PlayerStat : MonoBehaviour {
 	void Start () {
         m_bRecoveryStamina = false;
         m_bInvincible = false;
+        m_bShield = false;
         m_SuffleCoroutine = StartCoroutine(ShuffleRps(R.Const.RESET_TIME));
 
         //. Test Value
@@ -110,7 +124,7 @@ public class PlayerStat : MonoBehaviour {
         if (otherStat != null)
         {
             //. 충돌 로그
-            Log.Print(eLogFilter.Player, string.Format("On trigger me:{0} other:{1}", Id, otherStat.Id));
+            Log.Print(eLogFilter.Player, string.Format("On trigger player me:{0} other:{1}", Id, otherStat.Id));
             //. 무적 로그
             if (otherStat.Invincible == true || Invincible == true)
             {
@@ -125,10 +139,18 @@ public class PlayerStat : MonoBehaviour {
             //. 졌을 때만 처리
             if(result == eRpsCompareResult.Lose)
             {
+                //. 콜백 이벤트
+                if (DecidedRpsCompare != null)
+                    DecidedRpsCompare.Invoke(otherStat, this);
+
+                //. 실드가 있으면 처리 하지 않는다.
+                if (m_bShield)
+                    return;
+
                 //. special 가위 바위 보 처리
                 if(otherStat.Rps == otherStat.SpeciaRps)
                 {
-                    //. 상대편 special 가위 바위 보 연출
+                    //. Todo 상대편 special 가위 바위 보 연출
                     //. 생명력 감소
                     m_Hp.Sub(R.Const.SPECIAL_DAMAGE);
                 }
@@ -147,11 +169,8 @@ public class PlayerStat : MonoBehaviour {
                 }
                 else
                 {
-                    //. 3초 셔플
-                    StopSuffleCoroutine();
-                    m_SuffleCoroutine = StartCoroutine(ShuffleRps(R.Const.RESET_TIME));
-                    //. 3초 무적
-                    StartCoroutine(SetInvincivle(R.Const.RESET_TIME));
+                    //. 가위바위보 변경(3초 셔플 3초 무적)
+                    ChangeRps();
                 }              
             }
 
@@ -226,6 +245,27 @@ public class PlayerStat : MonoBehaviour {
             return true;
         
         return false;
+    }
+
+    /// <summary>
+    /// 가위바위보를 변경한다.
+    /// 변경하는 동안은 무적 처리 한다.
+    /// </summary>
+    public void ChangeRps()
+    {
+        //. 3초 셔플
+        StopSuffleCoroutine();
+        m_SuffleCoroutine = StartCoroutine(ShuffleRps(R.Const.RESET_TIME));
+        //. 3초 무적
+        StartCoroutine(SetInvincivle(R.Const.RESET_TIME));
+    }
+
+    /// <summary>
+    /// Hp를 회복 시킨다.
+    /// </summary>
+    public void AddHp(int _value)
+    {
+        m_Hp.Add(_value);
     }
 
     /// <summary>
