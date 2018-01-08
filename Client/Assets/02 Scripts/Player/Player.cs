@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public static event PlayerDiedEventHandler PlayerDied;      ///< 플레이어 사망 이벤트
+    public static event PlayerAwakedEventHandler PlayerAwaked;  ///< 플레이어 Awake 이벤트
+
+    public static int LocalPlayerId = 0;    ///< LocalPlayer Id 
+
     private Rigidbody m_Rigidbody = null;
     private Animator m_Animator = null;     ///< 애니메이터
     private PlayerState m_State = null;     ///< 현재 상태
@@ -26,14 +31,15 @@ public class Player : MonoBehaviour {
 
     void Awake()
     {
-        ObjectManager.Instance.OnCreatePlayer(this);
         m_StateCache = new Dictionary<ePlayerState, PlayerState>();
         m_StateEffects = new Dictionary<eItemEffect, StateEffectBase>();
-    }
 
-    void OnDestroy()
-    {
-        ObjectManager.Instance.OnDestroyPlayer(this);
+        //. Notify
+        PlayerAwaked(this);
+
+        //. Local이면 Local Id를 저장한다.
+        if (IsLocal)
+            LocalPlayerId = Id;
     }
 
 	// Use this for initialization
@@ -61,7 +67,6 @@ public class Player : MonoBehaviour {
         //. Test
         if (Input.GetButtonDown(R.String.INPUT_JUMP))
         {
-            OnPickupItem(1);
             UseItem();
         }
 	}
@@ -84,6 +89,18 @@ public class Player : MonoBehaviour {
         renderer.material.shader = Shader.Find("Toon/Lit Outline");
         renderer.material.SetTexture("_Ramp", litRampTexture);
         renderer.material.SetFloat("_Outline", 0.05f);
+    }
+
+    /// <summary>
+    /// 투명도 설정
+    /// </summary>
+    /// <param name="_alpha"> 0 ~ 1 사이 투명도 값</param>
+    private void SetTransparent(float _alpha)
+    {
+        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        renderer.material.shader = Shader.Find("Toon/BasicTransparent");
+        Color originColor = renderer.material.color;
+        renderer.material.color = new Color(originColor.r, originColor.g, originColor.b, _alpha);
     }
 
     private void OnAnimationEvent(eAnimationEvent _event)
@@ -152,6 +169,9 @@ public class Player : MonoBehaviour {
         //. UI 가린다.
 
         //. 사망 UI 
+
+        //. Notify
+        PlayerDied(Id);
     }
 
     /// <summary>
@@ -160,19 +180,34 @@ public class Player : MonoBehaviour {
     /// <param name="_visible"></param>
     public void SetVisible(bool _visible)
     {
-        //. Renderer
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        foreach(var renderer in renderers)
-            renderer.enabled = _visible;
+        //. local 이면 투명도를 준다.
+        if(IsLocal)
+        {
+            //. 투명도 쉐이더 적용
+            float alpha = _visible ? 1.0f : R.Const.TRANSPARENT_OFFSET;
+            SetTransparent(alpha);
 
-        //. Canvas
-        Canvas[] canvases = GetComponentsInChildren<Canvas>();
-        foreach (var canvas in canvases)
-            canvas.enabled = _visible;
+            //. 다시 원복
+            if (_visible)
+                SetRampTexture();
+        }
+        //. 아니면 전부 visible 설정
+        else 
+        {
+            //. Renderer
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (var renderer in renderers)
+                renderer.enabled = _visible;
 
-        //. Projector
-        Projector projector = GetComponentInChildren<Projector>();
-        projector.enabled = _visible;
+            //. Canvas
+            Canvas[] canvases = GetComponentsInChildren<Canvas>();
+            foreach (var canvas in canvases)
+                canvas.enabled = _visible;
+
+            //. Projector
+            Projector projector = GetComponentInChildren<Projector>();
+            projector.enabled = _visible;
+        }       
     }
 
     /// <summary>
@@ -195,6 +230,7 @@ public class Player : MonoBehaviour {
         if (m_Item == null)
             return;
 
+        Log.Print(eLogFilter.Item, string.Format("Player.UseItem >> player:{0} item:{1}", Id, m_Item.TableData.Id));
         m_Item.Use();
         //. Todo .UI 처리
         m_Item = null;  //. 사용했으면 지워준다.
@@ -209,6 +245,7 @@ public class Player : MonoBehaviour {
         if (tblItem == null)
             return;
 
+        Log.Print(eLogFilter.Item, string.Format("Player.OnPickupItem >> player:{0} item:{1}", Id, _itemId));
         m_Item = Item.Create(tblItem, Id);
         //. Todo UI 처리 
     }

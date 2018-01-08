@@ -67,7 +67,7 @@ public class BushManager : MonoBehaviour {
         if (_player.IsLocal)
         {
             //. 부쉬를 반 투명하게 해준다.
-            _bush.SetTransparent(0.3f);
+            _bush.SetTransparent(R.Const.TRANSPARENT_OFFSET);
 
             //. 같은 부쉬에 있는 애들을 보여준다.
             foreach(var playerId in enteredPlayerIds)

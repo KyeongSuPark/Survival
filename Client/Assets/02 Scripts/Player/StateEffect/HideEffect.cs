@@ -8,12 +8,15 @@ using UnityEngine;
 public class HideEffect : StateEffectBase
 {
 	// Use this for initialization
-	void Start () {
+	protected override void Awake() 
+    {
+        base.Awake();
         m_Stat.AddHiddenReason(eHiddenReason.Item);
 	}
 	
-	void OnDestroy()
+    protected override void OnTimerEnd()
     {
         m_Stat.RemoveHiddenReason(eHiddenReason.Item);
+        base.OnTimerEnd();
     }
 }

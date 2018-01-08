@@ -6,18 +6,25 @@ public class StateEffectBase : MonoBehaviour {
     private static readonly string TIMER_INVOKE_FUNC = "OnTimerEnd";
     protected Player m_Owner;             ///< 상태효과가 적용되고 있는 플레이어
     protected PlayerStat m_Stat;          ///< Owner의 스탯
-    protected TblItemEffect m_Effect;     ///< 발동될 이펙트 테이블
+    protected TblItemEffect m_TblEffect;     ///< 발동될 이펙트 테이블
 
-    void Awake()
+    protected virtual void Awake()
     {
         m_Owner = GetComponent<Player>();
         m_Stat = GetComponent<PlayerStat>();
     }
 
+    void OnDestroy()
+    {
+        if (m_Owner)
+            m_Owner.RemoveStateEffect(m_TblEffect.EffectType);
+    }
+
     /// <summary>
     /// 지속 시간 완료되면 호출되는 함수
+    /// 정리해야할 작업이 있다면 이 함수를 override 해서 사용하자. override 할때 base는 반드시 호출해야 한다.
     /// </summary>
-    private void OnTimerEnd()
+    protected virtual void OnTimerEnd()
     {
         DestroyObject(this);
     }
@@ -40,9 +47,7 @@ public class StateEffectBase : MonoBehaviour {
                 break;
             case eItemEffect.Transform: effect = _owner.AddComponent<TransformEffect>();
                 break;
-            case eItemEffect.Slow: effect = _owner.AddComponent<SlowEffect>();
-                break;
-            case eItemEffect.Haste: effect = _owner.AddComponent<HasteEffect>();
+            case eItemEffect.ChangeSpeed: effect = _owner.AddComponent<ChangeSpeedEffect>();
                 break;
             case eItemEffect.Analeptic: effect = _owner.AddComponent<AnalepticEffect>();
                 break;
@@ -64,12 +69,12 @@ public class StateEffectBase : MonoBehaviour {
     /// </summary>
     public virtual void Init( TblItemEffect _effect)
     {
-        m_Effect = _effect;
+        m_TblEffect = _effect;
 
         //. 타이머 설정
-        if(m_Effect.Duration != 0)
+        if(m_TblEffect.Duration != 0)
         {
-            float second = m_Effect.Duration * 0.001f;
+            float second = m_TblEffect.Duration * 0.001f;
             Invoke(TIMER_INVOKE_FUNC, second);
         }
         //. 타이머 만료됨을 바로 호출 해준다.
@@ -85,7 +90,7 @@ public class StateEffectBase : MonoBehaviour {
     public void ResetTimer()
     {
         CancelInvoke(TIMER_INVOKE_FUNC);
-        float second = m_Effect.Duration * 0.001f;
+        float second = m_TblEffect.Duration * 0.001f;
         Invoke(TIMER_INVOKE_FUNC, second);
     }
 }

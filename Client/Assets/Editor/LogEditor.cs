@@ -7,7 +7,7 @@ using System;
 /// Log 커스텀 에디터 
 /// Runtime에서 LogFilter Check 동적으로 하기 위해 
 /// </summary>
-[CustomEditor(typeof(Log))]
+[CustomEditor(typeof(LogFilter))]
 public class LogEditor : Editor
 {
     string[] mEnumNames = Enum.GetNames(typeof(eLogFilter));

@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class TableDataContainer{
     private eTableType m_eType;
-    private Dictionary<int, TblBase> m_Datas;
+    private Dictionary<int, TblBase> m_Datas;  
 
     public TableDataContainer(eTableType _type)
     {
@@ -18,6 +18,9 @@ public class TableDataContainer{
         m_eType = _type;
     }
 
+    /// <summary>
+    /// textAsset으로 부터 load 하여 캐쉬해둔다.
+    /// </summary>
     public void Load()
     {
         //. 문자열 받아 오고
@@ -70,6 +73,11 @@ public class TableDataContainer{
         }
     }
 
+    public Dictionary<int, TblBase>.KeyCollection GetKeys()
+    {
+        return m_Datas.Keys;
+    }
+
     public TblBase Find(int _id)
     {
         if (m_Datas.ContainsKey(_id))
@@ -97,10 +105,7 @@ public class TableDataContainer{
 
             string csvValue = _lookUp[field.Name]; //. csv 값
             if (csvValue == string.Empty)
-            {
-                Log.PrintError(eLogFilter.Table, string.Format("lookup table has empty value type:{0} field:{1}", _type.ToString(), field.Name));
                 continue;
-            }
 
             object variable = field.GetValue(_row); //. 변수
             if (variable is int)

@@ -9,7 +9,7 @@ public class HealEffect : StateEffectBase
 {
 	// Use this for initialization
 	void Start () {
-        m_Stat.AddHp(m_Effect.Value);
+        m_Stat.AddHp(m_TblEffect.Value);
 
         //. Todo 생명력 회복 이펙트
 	}

@@ -28,6 +28,7 @@ public class RollState : PlayerState {
         m_Stat.Velocity = m_Stat.MaxVelocity;
         
         //. Animator Trigger 발동
+        m_Animator.SetInteger(R.AnimHash.STATE, (int)GetCode());
         m_Animator.SetTrigger(R.AnimHash.ROLL);
     }
 

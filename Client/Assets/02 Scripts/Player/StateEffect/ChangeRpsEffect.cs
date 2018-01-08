@@ -7,8 +7,9 @@ using UnityEngine;
 /// </summary>
 public class ChangeRpsEffect : StateEffectBase
 {
-	// Use this for initialization
-	void Start () {
+    protected override void Awake()
+    {
+        base.Awake();
         m_Stat.ChangeRps();	
-	}
+    }
 }

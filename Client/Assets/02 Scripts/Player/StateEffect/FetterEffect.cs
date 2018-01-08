@@ -14,10 +14,12 @@ public class FetterEffect : StateEffectBase
         //. Todo 상태 이상 이펙트 넣으면 더 좋겠다.
 	}
 	
-	void OnDestroy()
+	protected override void OnTimerEnd()
     {
         m_Owner.ChangeState(ePlayerState.Idle);
 
         //. Todo 이펙트 제거
+
+        base.OnTimerEnd();
     }
 }

@@ -11,6 +11,7 @@ public class ResourceManager : MonoBehaviour {
     private Dictionary<string, Sprite> m_ItemIcons;          ///< 아이템 아이콘 < key:IconName >
     private Dictionary<eCountry, Sprite> m_CountryIcons;     ///< 국가 아이콘
     private Dictionary<string, GameObject> m_ItemPrefabs;    ///< 아이템 프리팹 < key:PrefabName >
+    private List<GameObject> m_TransformableObjects;         ///< 변신 가능한 목록들
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class ResourceManager : MonoBehaviour {
         m_CountryIcons = new Dictionary<eCountry, Sprite>();
         m_ItemPrefabs = new Dictionary<string, GameObject>();
         m_ItemIcons = new Dictionary<string, Sprite>();
+        m_TransformableObjects = new List<GameObject>();
     }
 
     /// <summary>
@@ -76,5 +78,22 @@ public class ResourceManager : MonoBehaviour {
 
         m_ItemPrefabs.Add(_prefabName, prefab);
         return prefab;
+    }
+
+    /// <summary>
+    /// 변신 가능한 목록에 추가한다.
+    /// </summary>
+    public static void AddTransformableObject(GameObject _object)
+    {
+        Instance.m_TransformableObjects.Add(_object);
+    }
+
+    /// <summary>
+    /// 변신 가능한 목록 중에 랜덤으로 하나 선택한다.
+    /// </summary>
+    public static GameObject PickTransformableObject()
+    {
+        int randomIdx = Random.Range(0, Instance.m_TransformableObjects.Count);
+        return Instance.m_TransformableObjects[randomIdx];
     }
 }

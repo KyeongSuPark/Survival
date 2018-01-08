@@ -58,6 +58,14 @@ public class TableDataManager : MonoBehaviour {
         return Instance.InternalFind<T>(_id);
     }
 
+    public static TableDataContainer FindContainer(eTableType _type)
+    {
+        if(Instance.m_Containers.ContainsKey(_type))
+            return Instance.m_Containers[_type];
+
+        return null;
+    }
+
     /// <summary>
     /// type 가지고 Table type을 반환한다.
     /// </summary>

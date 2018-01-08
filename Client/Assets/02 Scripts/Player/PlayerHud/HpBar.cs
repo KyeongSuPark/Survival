@@ -42,12 +42,15 @@ public class HpBar : MonoBehaviour {
             m_Bar.fillAmount = actionCurve.Evaluate(curTime);
 
             //. fill amount 양에 따라 색상 변경
-            if (m_Bar.fillAmount > 0.65f)
-                m_Bar.color = m_HpColorStep[0];
-            else if (m_Bar.fillAmount > 0.3f)
-                m_Bar.color = m_HpColorStep[1];
-            else
-                m_Bar.color = m_HpColorStep[2];
+            if (m_HpColorStep.Length == 3)
+            {
+                if (m_Bar.fillAmount > 0.65f)
+                    m_Bar.color = m_HpColorStep[0];
+                else if (m_Bar.fillAmount > 0.3f)
+                    m_Bar.color = m_HpColorStep[1];
+                else
+                    m_Bar.color = m_HpColorStep[2];
+            }
 
             curTime += Time.deltaTime;
             yield return null;
@@ -98,6 +101,10 @@ public class HpBar : MonoBehaviour {
         m_BackgroundCoroutine = null;
     }
 
+    /// <summary>
+    /// fill 값을 변경하는 연출을 재생한다.
+    /// </summary>
+    /// <param name="_fill">0-1 사이의 정규화된 값</param>
 	public void SetFillAmount(float _fill)
     {
         if(Utils.NearlyEquals(m_Bar.fillAmount,_fill) == false)
@@ -109,5 +116,15 @@ public class HpBar : MonoBehaviour {
             m_BarCoroutine = StartCoroutine(FillHpBar(_fill));
             m_BackgroundCoroutine = StartCoroutine(FillHpBarBackground(_fill));
         }
+    }
+
+    /// <summary>
+    /// fill 값에 연출을 사용하지 않고 바로 변경한다.
+    /// </summary>
+    /// <param name="_fill">0-1 사이의 정규화된 값</param>
+    public void SetForceFillAmount(float _fill)
+    {
+        m_Bar.fillAmount = _fill;
+        m_BarBackground.fillAmount = _fill;
     }
 }

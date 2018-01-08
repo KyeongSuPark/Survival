@@ -23,6 +23,6 @@ public class ShieldEffect : StateEffectBase
         //. Todo 실드 깨지는 이펙트
 
         //. 다음 Loop에 삭제시킨다.
-        DestroyObject(this);
+        OnTimerEnd();
     }
 }

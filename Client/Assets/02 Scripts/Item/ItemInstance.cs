@@ -20,11 +20,12 @@ public class ItemInstance : MonoBehaviour
         {
             //. 다른 플레이어와 충돌
             Player otherPlayer = _other.GetComponent<Player>();
-            if (otherPlayer != null)
+            if (otherPlayer != null && otherPlayer.Id != m_OwnerId)
             {
                 //. 효과 발동
                 Log.Print(eLogFilter.Item, string.Format("ItemInstance.OnTriggerEnter >> owner:{0} other:{1}", m_OwnerId, otherPlayer.Id));
                 otherPlayer.AddStateEffect(m_TblEffect);
+                Destroy(gameObject);
             }
         }
         //. 장애물
@@ -32,7 +33,7 @@ public class ItemInstance : MonoBehaviour
         {
             //. 파티클 넣을까?
             //. 즉시 사라진다. 
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -69,7 +70,7 @@ public class ItemInstance : MonoBehaviour
         }
 
         //. 인스턴스 생성
-        GameObject instance = Instantiate(prefab, owner.FirePos);
+        GameObject instance = Instantiate(prefab, owner.FirePos.position, owner.FirePos.rotation);
         ItemInstance itemInstance = instance.GetComponent<ItemInstance>();
 
         //. 속성 설정

@@ -98,8 +98,7 @@ public enum eItemEffect
     Heal,       ///< Hp 회복
     Shield,     ///< 방어
     Transform,  ///< 변신
-    Slow,       ///< 슬로우
-    Haste,      ///< 헤이스트
+    ChangeSpeed,///< 변속  
     Analeptic,  ///< 체력 회복
 }
 
@@ -133,7 +132,9 @@ public class R
         public static float RESET_CYCLE = 30.0f;         ///< 주기적으로 reset 시간 (s)
 
         public static int INVALID_BUSH_ID = 0;          ///< 유효하지 않은 부쉬 Id
-        public static int INVALID_PLAYER_ID = 0;        ///< 유효하지 않은 Player Id                                                        
+        public static int INVALID_PLAYER_ID = 0;        ///< 유효하지 않은 Player Id     
+
+        public static float TRANSPARENT_OFFSET = 0.3f;   ///< 투명도 계수
     }
 
     /// <summary>
@@ -189,6 +190,9 @@ public class R
         public static string TABLE_DATA_FOLDER = @"Table/";
     }
 
+    /// <summary>
+    /// Animator parameter 문자열에 대한 Hash
+    /// </summary>
     public class AnimHash
     {
         public static int STATE = Animator.StringToHash("State");
@@ -196,5 +200,13 @@ public class R
         public static int ROLL = Animator.StringToHash("Roll");
         public static int DIE = Animator.StringToHash("Die");
         public static int ABNORMAL = Animator.StringToHash("Abnormal");
+
+        public static int OPEN = Animator.StringToHash("Open");
     }
 }
+
+/// 플레어 사망 이벤트
+public delegate void PlayerDiedEventHandler(int _playerId);
+
+/// 플레이어 Awake 이벤트
+public delegate void PlayerAwakedEventHandler(Player _player);

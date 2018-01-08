@@ -14,33 +14,25 @@ public class ObjectManager : MonoBehaviour {
             Debug.LogError("Log has two instances");
 
         m_Players = new Dictionary<int, Player>();
+        Player.PlayerDied += OnPlayerDied;
+        Player.PlayerAwaked += OnPlayerAwaked;
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void OnDestroy()
+    {
+        Player.PlayerDied -= OnPlayerDied;
+        Player.PlayerAwaked -= OnPlayerAwaked;
+    }
 
-    /// <summary>
-    /// Player Awake될 때 호출
-    /// </summary>
-    public void OnCreatePlayer(Player _player)
+    private void OnPlayerAwaked(Player _player)
     {
         m_Players.Add(_player.Id, _player);
     }
 
-    /// <summary>
-    /// Player Destory될 때 호출
-    /// </summary>
-    public void OnDestroyPlayer(Player _player)
+    private void OnPlayerDied(int _playerId)
     {
-        m_Players.Remove(_player.Id);
-    }
+        m_Players.Remove(_playerId);
+    }	
 
     private Player InternalFindPlayer(int _playerId) 
     {

@@ -93,8 +93,10 @@
     <Compile Include="Assets\02 Scripts\Etc\ScreenResolutionSetter.cs" />
     <Compile Include="Assets\02 Scripts\Etc\ShakePosition.cs" />
     <Compile Include="Assets\02 Scripts\Etc\StateChangeEventArg.cs" />
+    <Compile Include="Assets\02 Scripts\Etc\TransformableObject.cs" />
     <Compile Include="Assets\02 Scripts\Etc\Utils.cs" />
     <Compile Include="Assets\02 Scripts\Item\Item.cs" />
+    <Compile Include="Assets\02 Scripts\Item\ItemChest.cs" />
     <Compile Include="Assets\02 Scripts\Item\ItemInstance.cs" />
     <Compile Include="Assets\02 Scripts\Manager\BushManager.cs" />
     <Compile Include="Assets\02 Scripts\Manager\Log.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Assets\02 Scripts\Manager\ResourceManager.cs" />
     <Compile Include="Assets\02 Scripts\Manager\TableDataManager.cs" />
     <Compile Include="Assets\02 Scripts\Options\DevelopOptions.cs" />
+    <Compile Include="Assets\02 Scripts\Options\LogFilter.cs" />
     <Compile Include="Assets\02 Scripts\Player\Player.cs" />
     <Compile Include="Assets\02 Scripts\Player\PlayerHud.cs" />
     <Compile Include="Assets\02 Scripts\Player\PlayerHud\HpBar.cs" />
@@ -114,12 +117,11 @@
     <Compile Include="Assets\02 Scripts\Player\State\RollState.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\AnalepticEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\ChangeRpsEffect.cs" />
+    <Compile Include="Assets\02 Scripts\Player\StateEffect\ChangeSpeedEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\FetterEffect.cs" />
-    <Compile Include="Assets\02 Scripts\Player\StateEffect\HasteEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\HealEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\HideEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\ShieldEffect.cs" />
-    <Compile Include="Assets\02 Scripts\Player\StateEffect\SlowEffect.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\StateEffectBase.cs" />
     <Compile Include="Assets\02 Scripts\Player\StateEffect\TransformEffect.cs" />
     <Compile Include="Assets\02 Scripts\Props\Bush.cs" />

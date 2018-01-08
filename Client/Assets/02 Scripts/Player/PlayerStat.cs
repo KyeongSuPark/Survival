@@ -269,6 +269,14 @@ public class PlayerStat : MonoBehaviour {
     }
 
     /// <summary>
+    /// Stamina를 회복 시킨다.
+    /// </summary>   
+    public void AddStamina(int _value)
+    {
+        m_Stamina.Add(_value);
+    }
+
+    /// <summary>
     /// hidden reason 추가
     /// </summary>
     public void AddHiddenReason(eHiddenReason _reason)

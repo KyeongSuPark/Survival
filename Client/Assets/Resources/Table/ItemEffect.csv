@@ -1,5 +1,5 @@
 Id,Name,EffectType,Duration,Value,Comment
-1,Fetter,Fetter,1500,0,1.5초간 속박 
+1,Fetter,Fetter,2500,0,2.5초간 속박 
 2,ChangeRps,ChangeRps,0,0,가위바위보 변경
 3,Hide,Hide,10000,0,은신 
 4,Hp_1,Hea,0,1,회복
@@ -7,6 +7,6 @@ Id,Name,EffectType,Duration,Value,Comment
 6,Hp_3,Hea,0,3,회복3
 7,Shield,Shield,10000,0,10초간 한번 방어
 8,Transform,Transform,0,0,변신
-9,Slow_30,Slow,1500,30,1.5초간 Max 속도가 30%로 준다.
+9,Slow_30,Slow,2000,30,2.0초간 Max 속도가 30%로 준다.
 10,Haste_150,Haste,2000,150,2초간 Max 속도가 150%로 증가
-11,Analeptic_50,Analeptic,0,50,Max 스태미너 50% 회복
+11,Analeptic_50,Analeptic,0,50,Max 스태미너 50 회복
