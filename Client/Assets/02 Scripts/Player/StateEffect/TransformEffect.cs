@@ -17,8 +17,9 @@ public class TransformEffect : StateEffectBase
     private Vector3 m_TargetScale;          ///< 변신 대상 local scale
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected override void Awake()
+    {
         //. 변신 가능한 오브젝트를 선택한다.
         GameObject target = ResourceManager.PickTransformableObject();
         if(target == null)
@@ -29,8 +30,9 @@ public class TransformEffect : StateEffectBase
         }
 
         //. 타겟 정보
+        MeshRenderer targetRenderer = target.GetComponent<MeshRenderer>();
         m_TargetMeshFilter = target.GetComponent<MeshFilter>();
-        m_TargetMaterial = target.GetComponent<Material>();
+        m_TargetMaterial = targetRenderer.material;
         m_TargetScale = target.transform.localScale;
 
         //. 원래 정보

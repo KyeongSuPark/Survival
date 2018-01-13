@@ -10,8 +10,10 @@ public class ChangeSpeedEffect : StateEffectBase
     private Animator m_Animator;            ///< Player의 animator
     private float m_OriginAnimSpeed;         ///< 원래 anim 재생 속도
     private float m_OriginMaxVelocity;       ///< 원래의 최고 속도
-	// Use this for initialization
-	void Start () {
+    
+    protected override void Awake()
+    {
+        base.Awake();
         m_Animator = GetComponent<Animator>();
 
 		//. 최고 속도를 기억해두자
@@ -25,7 +27,7 @@ public class ChangeSpeedEffect : StateEffectBase
         m_OriginAnimSpeed = m_Animator.speed;
         m_Animator.speed *= offset;
 	}
-	
+
     protected override void OnTimerEnd()
     {
         //. 기억해둔 값으로 복원

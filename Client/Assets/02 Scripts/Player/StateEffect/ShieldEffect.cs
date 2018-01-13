@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ShieldEffect : StateEffectBase
 {
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected override void Awake()
+    {
+        base.Awake();
         m_Stat.Shield = true;
-        m_Stat.DecidedRpsCompare += new PlayerStat.DecisionRpsCompareEventHandler(OnDecidedRpsCompare);
+        m_Stat.DecidedRpsCompare += OnDecidedRpsCompare;
 	}
-	
-	void OnDestroy()
+
+    protected override void OnDestroy()
     {
         m_Stat.Shield = false;
+        m_Stat.DecidedRpsCompare -= OnDecidedRpsCompare;
+        base.OnDestroy();
     }
 
     /// <summary>

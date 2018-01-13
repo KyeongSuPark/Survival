@@ -12,9 +12,4 @@ public class TransformableObject : MonoBehaviour {
 	void Start () {
         ResourceManager.AddTransformableObject(gameObject);	
 	}
-
-    void OnDestroy()
-    {
-        Log.PrintError(eLogFilter.Normal, "TransformableObject.OnDestroy() >> invalid usage");
-    }
 }

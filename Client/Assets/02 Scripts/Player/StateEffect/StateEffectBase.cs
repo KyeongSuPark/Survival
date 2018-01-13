@@ -8,13 +8,16 @@ public class StateEffectBase : MonoBehaviour {
     protected PlayerStat m_Stat;          ///< Owner의 스탯
     protected TblItemEffect m_TblEffect;     ///< 발동될 이펙트 테이블
 
+    /// <summary>
+    ///  초기화 작업이 필요할 때는 Awake를 override 하여 사용한다.
+    /// </summary>
     protected virtual void Awake()
     {
         m_Owner = GetComponent<Player>();
         m_Stat = GetComponent<PlayerStat>();
     }
 
-    void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (m_Owner)
             m_Owner.RemoveStateEffect(m_TblEffect.EffectType);
@@ -27,6 +30,13 @@ public class StateEffectBase : MonoBehaviour {
     protected virtual void OnTimerEnd()
     {
         DestroyObject(this);
+    }
+
+    /// <summary>
+    /// 즉시 적용 해야될때 호출되는 함수
+    /// </summary>
+    protected virtual void ApplyRightAway()
+    {
     }
 
     public static StateEffectBase Create(GameObject _owner, TblItemEffect _tblEffect)
@@ -80,6 +90,7 @@ public class StateEffectBase : MonoBehaviour {
         //. 타이머 만료됨을 바로 호출 해준다.
         else
         {
+            ApplyRightAway();
             OnTimerEnd();
         }
     }

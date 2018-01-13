@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class HealEffect : StateEffectBase
 {
-	// Use this for initialization
-	void Start () {
+    protected override void ApplyRightAway()
+    {
         m_Stat.AddHp(m_TblEffect.Value);
 
         //. Todo 생명력 회복 이펙트

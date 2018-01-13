@@ -7,11 +7,10 @@ using UnityEngine;
 /// </summary>
 public class AnalepticEffect : StateEffectBase
 {
-
-	// Use this for initialization
-	void Start () {
+    protected override void ApplyRightAway()
+    {
         m_Stat.AddStamina(m_TblEffect.Value);
-	
+
         //. Todo 이펙트 효과
-	}
+    }
 }

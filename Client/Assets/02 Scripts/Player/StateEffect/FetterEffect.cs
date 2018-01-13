@@ -7,8 +7,9 @@ using UnityEngine;
 /// </summary>
 public class FetterEffect : StateEffectBase
 {
-	// Use this for initialization
-	void Start () {
+    protected override void Awake()
+    {
+        base.Awake();
         m_Owner.ChangeState(ePlayerState.Abnormal);
 
         //. Todo 상태 이상 이펙트 넣으면 더 좋겠다.
