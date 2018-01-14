@@ -6,7 +6,11 @@ using UnityEngine.U2D;
 public class ResourceManager : MonoBehaviour {
 
     public static ResourceManager Instance = null;
-    public SpriteAtlas m_ItemAtlas;
+
+    [SerializeField]
+    private SpriteAtlas m_ItemAtlas;
+
+    private Animator m_TransformedPlayerAnimator;            ///< 변신 했을 때 사용될 플레이어 애니메이터
 
     private Dictionary<string, Sprite> m_ItemIcons;          ///< 아이템 아이콘 < key:IconName >
     private Dictionary<eCountry, Sprite> m_CountryIcons;     ///< 국가 아이콘

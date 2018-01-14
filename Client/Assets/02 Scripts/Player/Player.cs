@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
 
     private Dictionary<ePlayerState, PlayerState> m_StateCache = null;  ///< 플레이어 상태 캐쉬
     private Dictionary<eItemEffect, StateEffectBase> m_StateEffects = null;
+    private List<ePlayerState> m_RestrictionStates = null;              ///< 제약 상태 (상태 변화가 일어나지 않도록 한다)
 
     public eCountry Country{ get { return m_eCountry; } }
     public bool IsLocal { get { return m_bLocal; } }
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void CheckAnyState()
     {
-        if(Input.GetButtonDown(R.String.INPUT_JUMP))
+        if (Input.GetButtonDown(R.String.INPUT_JUMP))
             ChangeState(ePlayerState.Roll);
     }
 
@@ -127,6 +128,10 @@ public class Player : MonoBehaviour {
     public void ChangeState(ePlayerState _newState, StateChangeEventArg _arg = null)
     {
         if (m_State != null && m_State.GetCode() == _newState)
+            return;
+
+        //. 변경될 상태가 제약 상태에 있다면 상태 변경 시키지 않는다.
+        if (m_RestrictionStates.Contains(_newState))
             return;
 
         //. 캐쉬 된게 있는지 검사
@@ -287,4 +292,24 @@ public class Player : MonoBehaviour {
             return true;
         return false;
     }
+
+    /// <summary>
+    /// 제약 상태 추가
+    /// </summary>
+    /// <param name="_state">제약 될 상태</param>
+    public void AddRestrictionState(ePlayerState _state)
+    {
+        if(m_RestrictionStates.Contains(_state) == false)
+            m_RestrictionStates.Add(_state);
+    }
+
+    /// <summary>
+    /// 제약 상태 제거
+    /// </summary>
+    /// <param name="_state">제약 해제할 상태</param>
+    public void RemoveRestrictionState(ePlayerState _state)
+    {
+        m_RestrictionStates.Remove(_state);
+    }
+
 }
