@@ -7,10 +7,10 @@ using UnityEngine;
 /// </summary>
 public class HideEffect : StateEffectBase
 {
-	// Use this for initialization
-	protected override void Awake() 
+    // Use this for initialization
+    public override void Init(TblItemEffect _effect)
     {
-        base.Awake();
+        base.Init(_effect);
         m_Stat.AddHiddenReason(eHiddenReason.Item);
 	}
 	

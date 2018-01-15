@@ -7,6 +7,6 @@ Id,Name,EffectType,Duration,Value,Comment
 6,Hp_3,Heal,0,3,회복3
 7,Shield,Shield,10000,0,10초간 한번 방어
 8,Transform,Transform,15000,0,15 초간 변신
-9,Slow_30,Slow,2000,30,2.0초간 Max 속도가 30%로 준다.
-10,Haste_150,Haste,2000,150,2초간 Max 속도가 150%로 증가
+9,Slow_30,ChangeSpeed,2000,30,2.0초간 Max 속도가 30%로 준다.
+10,Haste_150,ChangeSpeed,2000,150,2초간 Max 속도가 150%로 증가
 11,Analeptic_50,Analeptic,0,50,Max 스태미너 50 회복

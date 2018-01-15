@@ -9,13 +9,15 @@ public class ResourceManager : MonoBehaviour {
 
     [SerializeField]
     private SpriteAtlas m_ItemAtlas;
-
-    private Animator m_TransformedPlayerAnimator;            ///< 변신 했을 때 사용될 플레이어 애니메이터
+    [SerializeField]
+    private RuntimeAnimatorController m_AnimControllerForTrans;    ///< 변신 했을 때 사용될 플레이어 애니메이터 컨트롤러
 
     private Dictionary<string, Sprite> m_ItemIcons;          ///< 아이템 아이콘 < key:IconName >
     private Dictionary<eCountry, Sprite> m_CountryIcons;     ///< 국가 아이콘
     private Dictionary<string, GameObject> m_ItemPrefabs;    ///< 아이템 프리팹 < key:PrefabName >
     private List<GameObject> m_TransformableObjects;         ///< 변신 가능한 목록들
+
+    public RuntimeAnimatorController AnimControllerForTrans { get { return m_AnimControllerForTrans; } }
 
     void Awake()
     {

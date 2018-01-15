@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 상태 효과 이펙트
+/// 사용법 : 자식 클래스로 확장하여 사용한다.
+///     case 1 - 즉시 효과 : ApplyRightAway() 에서 상태를 적용한다.
+///     case 2 - 타이머 : Init() 에서 상태를 적용하고, OnTimerEnd() 에서 원 상태로 복구한다.
+/// </summary>
 public class StateEffectBase : MonoBehaviour {
     private static readonly string TIMER_INVOKE_FUNC = "OnTimerEnd";
     protected Player m_Owner;             ///< 상태효과가 적용되고 있는 플레이어
     protected PlayerStat m_Stat;          ///< Owner의 스탯
     protected TblItemEffect m_TblEffect;     ///< 발동될 이펙트 테이블
 
-    /// <summary>
-    ///  초기화 작업이 필요할 때는 Awake를 override 하여 사용한다.
-    /// </summary>
-    protected virtual void Awake()
+    void Awake()
     {
         m_Owner = GetComponent<Player>();
         m_Stat = GetComponent<PlayerStat>();
@@ -76,8 +79,9 @@ public class StateEffectBase : MonoBehaviour {
 
     /// <summary>
     /// 테이블 데이터로 부터 상태 이펙트를 초기화
+    /// 초기화 작업이 필요 할때는 Init을 상속 override 하자
     /// </summary>
-    public virtual void Init( TblItemEffect _effect)
+    public virtual void Init(TblItemEffect _effect)
     {
         m_TblEffect = _effect;
 

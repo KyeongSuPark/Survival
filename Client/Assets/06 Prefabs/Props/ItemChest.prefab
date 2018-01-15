@@ -650,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HpBar: {fileID: 114172296438082900}
   m_HudCanvas: {fileID: 223664386386709432}
-  m_TestId: 7
+  m_TestId: 10
 --- !u!114 &114172296438082900
 MonoBehaviour:
   m_ObjectHideFlags: 1

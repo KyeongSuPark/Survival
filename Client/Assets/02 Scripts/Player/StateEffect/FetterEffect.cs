@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class FetterEffect : StateEffectBase
 {
-    protected override void Awake()
+    public override void Init(TblItemEffect _effect)
     {
-        base.Awake();
+        base.Init(_effect);
         m_Owner.ChangeState(ePlayerState.Abnormal);
 
         //. Todo 상태 이상 이펙트 넣으면 더 좋겠다.
-	}
+    }
 	
 	protected override void OnTimerEnd()
     {

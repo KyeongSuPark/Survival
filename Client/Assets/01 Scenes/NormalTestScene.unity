@@ -722,6 +722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ItemAtlas: {fileID: 0}
+  m_AnimControllerForTrans: {fileID: 9100000, guid: 7d0f163d92402f149bd423a10247f726,
+    type: 2}
 --- !u!1 &1549306980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1022,12 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 7d0f163d92402f149bd423a10247f726, type: 2}
+      objectReference: {fileID: 9100000, guid: 294065c0d563a2c479a0d7090536a11d, type: 2}
+    - target: {fileID: 95368515728047112, guid: 09e16e309e35c43499a17511f3652218,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09e16e309e35c43499a17511f3652218, type: 2}
   m_IsPrefabParent: 0
@@ -1066,7 +1073,7 @@ Prefab:
     - target: {fileID: 114083157225003734, guid: 19c7013c8b486b249bc4fee4ec866633,
         type: 2}
       propertyPath: m_TestId
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19c7013c8b486b249bc4fee4ec866633, type: 2}

@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
     {
         m_StateCache = new Dictionary<ePlayerState, PlayerState>();
         m_StateEffects = new Dictionary<eItemEffect, StateEffectBase>();
+        m_RestrictionStates = new List<ePlayerState>();
 
         //. Notify
         PlayerAwaked(this);
@@ -118,8 +119,8 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void CheckAnyState()
     {
-        if (Input.GetButtonDown(R.String.INPUT_JUMP))
-            ChangeState(ePlayerState.Roll);
+        //if (Input.GetButtonDown(R.String.INPUT_JUMP))
+        //    ChangeState(ePlayerState.Roll);
     }
 
     /// <summary>
