@@ -1,15 +1,15 @@
-Id,Name,UseType,Icon,Prefab,ItemEffectId,Comment
-1,Lasso,Projectile,Lasso,Lasso,1,올가미
-2,Rps,Use,ChangeRps,,2,가위바위보 변경
-3,HidePotion,Use,HidePotion,,3,투명 물약
-4,HpPotion_s,Use,HpPotion_S,,4,회복 물약_S
-5,HpPotion_m,Use,HpPotion_M,,5,회복 물약_M
-6,HpPotion_l,Use,HpPotion_L,,6,회복 물약_L
-7,Shield,Use,Shield,,7,방패
-8,Transformation,Use,Transformation,,8,은폐(변신)
-9,Glue,Trap,Glue,Glue,9,접착제
-10,Trap,Trap,Trap,Trap,1,덫
-11,HastePotion,Use,HastePotion,,10,스피드 물약
-12,StaminaPotion,Use,StaminaPotion,,11,체력 물약
-13,Blackout,UseToOther,Blackout,,12,암전
-14,ReverseInput,UseToOther,ReverseInput,,13,입력반전
+Id,Name,UseType,Icon,Prefab,Grade,ItemEffectId,Comment
+1,Lasso,Projectile,Lasso,Lasso,Normal,1,올가미
+2,Rps,Use,ChangeRps,,Normal,2,가위바위보 변경
+3,HidePotion,Use,HidePotion,,Normal,3,투명 물약
+4,HpPotion_s,Use,HpPotion_S,,Lair,4,회복 물약_S
+5,HpPotion_m,Use,HpPotion_M,,Lair,5,회복 물약_M
+6,HpPotion_l,Use,HpPotion_L,,Lair,6,회복 물약_L
+7,Shield,Use,Shield,,Lair,7,방패
+8,Transformation,Use,Transformation,,Normal,8,은폐(변신)
+9,Glue,Trap,Glue,Glue,Normal,9,접착제
+10,Trap,Trap,Trap,Trap,Normal,1,덫
+11,HastePotion,Use,HastePotion,,Normal,10,스피드 물약
+12,StaminaPotion,Use,StaminaPotion,,Normal,11,체력 물약
+13,Blackout,UseToOther,Blackout,,Epic,12,암전
+14,ReverseInput,UseToOther,ReverseInput,,Epic,13,입력반전

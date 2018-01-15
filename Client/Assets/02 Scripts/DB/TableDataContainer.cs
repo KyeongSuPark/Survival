@@ -12,6 +12,8 @@ public class TableDataContainer{
     private eTableType m_eType;
     private Dictionary<int, TblBase> m_Datas;  
 
+    public Dictionary<int, TblBase> Datas {get { return m_Datas; } }
+
     public TableDataContainer(eTableType _type)
     {
         m_Datas = new Dictionary<int, TblBase>();
@@ -71,11 +73,6 @@ public class TableDataContainer{
                 m_Datas.Add(row.Id, row);
             }
         }
-    }
-
-    public Dictionary<int, TblBase>.KeyCollection GetKeys()
-    {
-        return m_Datas.Keys;
     }
 
     public TblBase Find(int _id)

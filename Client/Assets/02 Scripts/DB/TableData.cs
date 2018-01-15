@@ -19,6 +19,7 @@ public class TblItem : TblBase
     public eItemUseType UseType; ///< 사용 방법
     public string Icon;          ///< 아이콘 이름
     public string Prefab;        ///< 프리팹 리소스 경로
+    public eItemGrade Grade;     ///< 아이템 등급
     public int ItemEffectId;	 ///< 아이템 효과 Id      
                                  
     public TblItem()

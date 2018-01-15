@@ -16,6 +16,8 @@ public class ItemChest : MonoBehaviour
         public float m_Time;    ///< 점유한 시간(s)
     }
 
+    [SerializeField]
+    private eItemGrade m_eGrade;                    ///< 이 상자에서 나올 아이템의 등급
     private TblItem m_TblItem;                     ///< 결정된 아이템
     private float m_Timer;                          ///< 몇 초 동안 점유해야 아이템을 획득할수 있나?
     private bool m_bOpen;                          ///< 상자가 열렸나?
@@ -34,24 +36,37 @@ public class ItemChest : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_Possessions = new List<Possesion>();
 
-        //. 아이템 테이블 컨테이너에서 랜덤으로 하나 픽한다.
+        //. 아이템 테이블 컨테이너에서 등급에 맞는 아이템 중에 랜덤으로 하나 픽한다.
         TableDataContainer container = TableDataManager.FindContainer(eTableType.Item);
-        Dictionary<int, TblBase>.KeyCollection keys = container.GetKeys();
-        int randomIdx = Random.Range(0, keys.Count);
+
+        //. 등급 아이템 후보
+        List<TblItem> candidates = new List<TblItem>();
+        foreach (var pair in container.Datas)
+        {
+            TblItem item = pair.Value as TblItem;
+            if (item.Grade == m_eGrade)
+                candidates.Add(item);
+        }
+
+        //. 에러
+        if (candidates.Count == 0)
+        {
+            Log.PrintError(eLogFilter.Item, string.Format("Item candidates is empty grade:{0}", m_eGrade));
+            DestroyObject(gameObject);
+        }
+
+
+        int randomIdx = Random.Range(0, candidates.Count);
 
         //. Todo Test 후 삭제
-        randomIdx = m_TestId;
-
-        int tempIdx = 0;
-        foreach(var itemKey in keys)
+        //randomIdx = m_TestId;
+        for (int i = 0; i < candidates.Count; ++i)
         {
-            if(randomIdx == tempIdx)
+            if (i == randomIdx)
             {
-                m_TblItem = container.Find(itemKey) as TblItem;
+                m_TblItem = candidates[i];
                 break;
-            }
-
-            ++tempIdx;
+            }            
         }
 
         Player.PlayerDied += OnPlayerDied;

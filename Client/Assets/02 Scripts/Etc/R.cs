@@ -119,6 +119,18 @@ public enum eTableType
 }
 
 /// <summary>
+/// 아이템 등급
+/// 각 구분의 의미는 없고, 아이템 상자에서 나오는 아이템들을 결정할 때 사용
+/// </summary>
+public enum eItemGrade
+{
+    Normal,
+    Lair,
+    Epic,
+}
+
+
+/// <summary>
 /// 전역 상수값들 선언
 /// 내부 클래스는 카테고리처럼 사용
 /// </summary>
