@@ -11,13 +11,17 @@ public class ResourceManager : MonoBehaviour {
     private SpriteAtlas m_ItemAtlas;
     [SerializeField]
     private RuntimeAnimatorController m_AnimControllerForTrans;    ///< 변신 했을 때 사용될 플레이어 애니메이터 컨트롤러
+    [SerializeField]
+    private Light m_Sun;                                     ///< Directional light
 
     private Dictionary<string, Sprite> m_ItemIcons;          ///< 아이템 아이콘 < key:IconName >
     private Dictionary<eCountry, Sprite> m_CountryIcons;     ///< 국가 아이콘
     private Dictionary<string, GameObject> m_ItemPrefabs;    ///< 아이템 프리팹 < key:PrefabName >
+    private Dictionary<string, GameObject> m_Prefabs;        ///< 일반 프리팹 < key:PrefabName >
     private List<GameObject> m_TransformableObjects;         ///< 변신 가능한 목록들
 
     public RuntimeAnimatorController AnimControllerForTrans { get { return m_AnimControllerForTrans; } }
+    public Light Sun { get { return m_Sun; } }
 
     void Awake()
     {
@@ -29,6 +33,7 @@ public class ResourceManager : MonoBehaviour {
         m_CountryIcons = new Dictionary<eCountry, Sprite>();
         m_ItemPrefabs = new Dictionary<string, GameObject>();
         m_ItemIcons = new Dictionary<string, Sprite>();
+        m_Prefabs = new Dictionary<string, GameObject>();
         m_TransformableObjects = new List<GameObject>();
     }
 
@@ -83,6 +88,23 @@ public class ResourceManager : MonoBehaviour {
             return null;
 
         m_ItemPrefabs.Add(_prefabName, prefab);
+        return prefab;
+    }
+
+    /// <summary>
+    /// 일반 프리팹 검색 (없으면 로드한 후 캐쉬한다.)
+    /// </summary>
+    public static GameObject FindOrLoadPrefab(string _prefabName)
+    {
+        if (Instance.m_Prefabs.ContainsKey(_prefabName))
+            return Instance.m_Prefabs[_prefabName];
+
+        string path = string.Format("{0}{1}", R.Path.COMMON_PREFAB_FOLDER, _prefabName);
+        GameObject prefab = Resources.Load<GameObject>(path);
+        if (prefab == null)
+            return null;
+
+        Instance.m_Prefabs.Add(_prefabName, prefab);
         return prefab;
     }
 

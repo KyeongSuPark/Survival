@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 주어진 신간 만큼 은신 효과
+/// 다른 플레이어 입력 반전 효과
 /// </summary>
-public class HideEffect : StateEffectBase
+public class ReverseInputEffect : StateEffectBase
 {
-    // Use this for initialization
     protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect);
-        m_Stat.AddHiddenReason(eHiddenReason.Item);
-	}
-	
+        if(m_Owner.IsLocal)
+            InputManager.Reverse = true;
+    }
+
     protected override void OnTimerEnd()
     {
-        m_Stat.RemoveHiddenReason(eHiddenReason.Item);
+        if (m_Owner.IsLocal)
+            InputManager.Reverse = false;
         base.OnTimerEnd();
     }
 }

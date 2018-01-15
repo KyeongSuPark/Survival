@@ -4,6 +4,7 @@ using System.Collections;
 /// <summary>
 /// Player 상태 값
 /// 순서 변경시 Animator Transition 설정값 주의하자
+/// 추가/삭제 시 인스턴스 구현 로직 필요
 /// </summary>
 public enum ePlayerState
 {
@@ -79,27 +80,32 @@ public enum eCountry
 
 /// <summary>
 /// 아이템 어떤식으로 사용하냐에 따른 분류
+/// 추가/삭제 시 인스턴스 구현 로직 필요
 /// </summary>
 public enum eItemUseType
 {
     Use,            ///< 즉시 사용
     Projectile,     ///< 발사체
     Trap,           ///< 설치 류
+    UseToOther,     ///< 다른 플레이어에게 사용
 }
 
 /// <summary>
 /// 아이템 효과 종류
+/// 추가/삭제 시 인스턴스 구현 로직 필요
 /// </summary>
 public enum eItemEffect
 {
-    Fetter,     ///< 속박
-    ChangeRps,  ///< Rps 변경
-    Hide,       ///< 은신
-    Heal,       ///< Hp 회복
-    Shield,     ///< 방어
-    Transform,  ///< 변신
-    ChangeSpeed,///< 변속  
-    Analeptic,  ///< 체력 회복
+    Fetter,         ///< 속박
+    ChangeRps,      ///< Rps 변경
+    Hide,           ///< 은신
+    Heal,           ///< Hp 회복
+    Shield,         ///< 방어
+    Transform,      ///< 변신
+    ChangeSpeed,    ///< 변속  
+    Analeptic,      ///< 체력 회복
+    Blackout,       ///< 암전
+    ReverseInput,   ///< 입력 반전
 }
 
 /// <summary>
@@ -167,6 +173,9 @@ public class R
 
         /// Anim State
         public static string ANIM_STATE_ROLL = "Roll";          ///< 구르기 상태
+
+        /// Resource
+        public static string TOP_SPOT_LIGHT_PREFAB = "TopSpotLight";
     }
 
     /// <summary>
@@ -188,6 +197,9 @@ public class R
 
         /// 테이블 데이터 패스 (리소스)
         public static string TABLE_DATA_FOLDER = @"Table/";
+
+        /// 일반 프리팹 패스 (리소스)
+        public static string COMMON_PREFAB_FOLDER = @"Prefabs/";
     }
 
     /// <summary>

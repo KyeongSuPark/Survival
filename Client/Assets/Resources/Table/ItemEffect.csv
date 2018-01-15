@@ -10,3 +10,5 @@ Id,Name,EffectType,Duration,Value,Comment
 9,Slow_30,ChangeSpeed,2000,30,2.0초간 Max 속도가 30%로 준다.
 10,Haste_150,ChangeSpeed,2000,150,2초간 Max 속도가 150%로 증가
 11,Analeptic_50,Analeptic,0,50,Max 스태미너 50 회복
+12,Blackout,Blackout,30000,0,3초간 다른 플레이어 암전
+13,ReverseInput,ReverseInput,3000,0,3초간 다른 플레이어 입력 반전

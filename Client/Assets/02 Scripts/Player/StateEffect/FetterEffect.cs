@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class FetterEffect : StateEffectBase
 {
-    public override void Init(TblItemEffect _effect)
+    protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect);
         m_Owner.ChangeState(ePlayerState.Abnormal);

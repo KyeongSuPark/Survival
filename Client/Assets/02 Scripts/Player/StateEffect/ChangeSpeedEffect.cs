@@ -11,7 +11,7 @@ public class ChangeSpeedEffect : StateEffectBase
     private float m_OriginAnimSpeed;         ///< 원래 anim 재생 속도
     private float m_OriginMaxVelocity;       ///< 원래의 최고 속도
 
-    public override void Init(TblItemEffect _effect)
+    protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect);
         m_Animator = GetComponent<Animator>();

@@ -64,6 +64,10 @@ public class StateEffectBase : MonoBehaviour {
                 break;
             case eItemEffect.Analeptic: effect = _owner.AddComponent<AnalepticEffect>();
                 break;
+            case eItemEffect.Blackout: effect = _owner.AddComponent<BlackoutEffect>();
+                break;
+            case eItemEffect.ReverseInput: effect = _owner.AddComponent<ReverseInputEffect>();
+                break;
         }
 
         if(effect == null)
@@ -81,7 +85,7 @@ public class StateEffectBase : MonoBehaviour {
     /// 테이블 데이터로 부터 상태 이펙트를 초기화
     /// 초기화 작업이 필요 할때는 Init을 상속 override 하자
     /// </summary>
-    public virtual void Init(TblItemEffect _effect)
+    protected virtual void Init(TblItemEffect _effect)
     {
         m_TblEffect = _effect;
 

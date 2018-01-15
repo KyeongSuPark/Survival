@@ -19,7 +19,7 @@ public class RollState : PlayerState {
     public override void OnStateEnter(StateChangeEventArg _arg = null)
     {
         //. 상태 진입시 방향
-        m_Dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        m_Dir = InputManager.GetMoveDir();
         //. 방향으로 바로 돌게 한다.
         m_Transform.LookAt(m_Transform.position + m_Dir);
 

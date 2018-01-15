@@ -32,6 +32,7 @@ public class Item
             case eItemUseType.Use:
             case eItemUseType.Trap:
             case eItemUseType.Projectile:
+            case eItemUseType.UseToOther:
                 return new Item(_tblItem, _ownerId);
         }
 
@@ -49,13 +50,31 @@ public class Item
         {
             ItemInstance.CreateFromItem(this);
         }
-        //. 즉시 나한테 효과 발동
+        //. 사용 하는 아이템 
         else
         {
             TblItemEffect tblEffect = TableDataManager.Find<TblItemEffect>(m_TblItem.ItemEffectId);
-            Player owner = ObjectManager.FindPlayer(m_OwnerId);
-            if (owner != null && tblEffect != null)
-                owner.AddStateEffect(tblEffect);
+            //. 즉시 나한테 효과 발동
+            if (m_TblItem.UseType == eItemUseType.Use)
+            {
+                Player owner = ObjectManager.FindPlayer(m_OwnerId);
+                if (owner != null && tblEffect != null)
+                    owner.AddStateEffect(tblEffect);
+            }
+            //. 나를 제외한 다른 플레이어에게 효과 발동
+            else if(m_TblItem.UseType == eItemUseType.UseToOther)
+            {
+                foreach(var pair in ObjectManager.Instance.Players)
+                {
+                    Player player = pair.Value;
+                    //. 사용자는 제외
+                    if (player.Id == m_OwnerId)
+                        continue;
+
+                    player.AddStateEffect(tblEffect);
+                }
+            }
+            
         }
     }
 

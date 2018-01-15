@@ -11,3 +11,5 @@ Id,Name,UseType,Icon,Prefab,ItemEffectId,Comment
 10,Trap,Trap,Trap,Trap,1,덫
 11,HastePotion,Use,HastePotion,,10,스피드 물약
 12,StaminaPotion,Use,StaminaPotion,,11,체력 물약
+13,Blackout,UseToOther,Blackout,,12,암전
+14,ReverseInput,UseToOther,ReverseInput,,13,입력반전

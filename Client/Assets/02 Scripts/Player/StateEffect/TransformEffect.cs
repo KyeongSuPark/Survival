@@ -20,7 +20,7 @@ public class TransformEffect : StateEffectBase
     private Vector3 m_TargetScale;          ///< 변신 대상 local scale
 
     // Use this for initialization
-    public override void Init(TblItemEffect _effect)
+    protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect); 
 

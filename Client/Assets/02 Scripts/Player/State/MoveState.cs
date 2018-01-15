@@ -34,7 +34,7 @@ public class MoveState : PlayerState {
     public override void Update()
     {
         //. 입력 값으로 이동
-        Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 moveDir = InputManager.GetMoveDir();
         m_Transform.position += moveDir * m_Stat.Velocity * Time.deltaTime;
 
         //. 이동 시작, 입력 방향으로 선회

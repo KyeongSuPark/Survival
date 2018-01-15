@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShieldEffect : StateEffectBase
 {
     // Use this for initialization
-    public override void Init(TblItemEffect _effect)
+    protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect);
         m_Stat.Shield = true;

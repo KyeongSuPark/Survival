@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour {
     public static ObjectManager Instance = null;
-    Dictionary<int, Player> m_Players;
+    private Dictionary<int, Player> m_Players;
+
+    public Dictionary<int, Player> Players { get { return m_Players; } } 
 
     void Awake()
     {

@@ -178,4 +178,9 @@ public class PlayerHud : MonoBehaviour {
         }
         m_CountryIcon.sprite = icon;
     }
+
+    public void SetVisible(bool _visible)
+    {
+        m_HudCanvas.SetActive(_visible);
+    }
 }
