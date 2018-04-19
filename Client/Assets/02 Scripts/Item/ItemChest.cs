@@ -56,17 +56,21 @@ public class ItemChest : MonoBehaviour
         }
 
 
-        int randomIdx = Random.Range(0, candidates.Count);
-
-        //. Todo Test 후 삭제
-        //randomIdx = m_TestId;
+        int randomIdx = Random.Range(0, candidates.Count);       
         for (int i = 0; i < candidates.Count; ++i)
         {
-            if (i == randomIdx)
+            //. Todo Test 후 삭제
+            if (m_TestId == candidates[i].Id)
             {
                 m_TblItem = candidates[i];
                 break;
-            }            
+            }
+
+            //if (i == randomIdx)
+            //{
+            //    m_TblItem = candidates[i];
+            //    break;
+            //}            
         }
 
         Player.PlayerDied += OnPlayerDied;

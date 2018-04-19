@@ -8,8 +8,6 @@ using UnityEngine;
 public class BlackoutEffect : StateEffectBase
 {
     private Vector3 m_SpotLightOffset = new Vector3(0.0f, 5.0f, 0.0f);  ///< Spot light 상대 좌표
-    private GameObject m_SpotLight;
-
     protected override void Init(TblItemEffect _effect)
     {
         base.Init(_effect);
@@ -27,13 +25,8 @@ public class BlackoutEffect : StateEffectBase
                 playerHud.SetVisible(false);
             }
 
-            //. SpotLight를 가져와 Attach 한다.
-            m_SpotLight = Instantiate(ResourceManager.FindOrLoadPrefab(R.String.TOP_SPOT_LIGHT_PREFAB));
-            m_SpotLight.transform.parent = m_Owner.transform;
-            m_SpotLight.transform.localPosition = m_SpotLightOffset;
-
-            //. Sun을 Diable 시켜준다.
-            ResourceManager.Instance.Sun.enabled = false;
+            //. UI 암전 효과를 준다.
+            GameHud.SetBlackout(true);
         }
     }
 
@@ -53,12 +46,8 @@ public class BlackoutEffect : StateEffectBase
                 playerHud.SetVisible(true);
             }
 
-            //. SpotLight를 가져와 dettach 한다.
-            m_SpotLight.transform.parent = null;
-            DestroyObject(m_SpotLight);
-
-            //. Sun을 enable 시켜준다.
-            ResourceManager.Instance.Sun.enabled = true;
+            //. UI 암전 효과를 끈다.
+            GameHud.SetBlackout(false);
         }
 
         base.OnTimerEnd();

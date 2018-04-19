@@ -185,9 +185,6 @@ public class R
 
         /// Anim State
         public static string ANIM_STATE_ROLL = "Roll";          ///< 구르기 상태
-
-        /// Resource
-        public static string TOP_SPOT_LIGHT_PREFAB = "TopSpotLight";
     }
 
     /// <summary>
