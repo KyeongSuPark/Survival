@@ -224,6 +224,15 @@ public class R
 
         public static int OPEN = Animator.StringToHash("Open");
     }
+
+    /// <summary>
+    /// Button 이름들 
+    /// </summary>
+    public class Button
+    {
+        public static string JUMP = "Jump";
+        public static string ITEM_USE = "ItemUse";
+    }
 }
 
 /// 플레어 사망 이벤트

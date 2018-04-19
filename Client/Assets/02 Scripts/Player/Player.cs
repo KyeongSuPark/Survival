@@ -66,19 +66,23 @@ public class Player : MonoBehaviour {
         if (m_State != null)
             m_State.Update();
 
-        //. Test
-        if (Input.GetButtonDown(R.String.INPUT_JUMP))
-        {
-            UseItem();
-        }
-	}
+        if (IsLocal)
+            LocalUpdate();
+    }
 
     void LateUpdate()
     {
         if (m_State != null)
             m_State.PostUpdate();
-        
-        CheckAnyState();
+    }
+
+    private void LocalUpdate()
+    {
+        if (InputManager.GetButtonDown(R.Button.ITEM_USE))
+            UseItem();
+
+        if (InputManager.GetButtonDown(R.Button.JUMP))
+            ChangeState(ePlayerState.Roll);
     }
 
     /// <summary>
@@ -112,15 +116,6 @@ public class Player : MonoBehaviour {
             Debug.Log("anim event " + _event.ToString());
             m_State.OnAnimationEvent(_event);
         }
-    }
-
-    /// <summary>
-    ///   State 제약 없이 변경되어야 하는 상태 체크
-    /// </summary>
-    private void CheckAnyState()
-    {
-        //if (Input.GetButtonDown(R.String.INPUT_JUMP))
-        //    ChangeState(ePlayerState.Roll);
     }
 
     /// <summary>
